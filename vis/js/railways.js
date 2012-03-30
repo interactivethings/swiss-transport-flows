@@ -53,6 +53,7 @@ var setNewProjectionSize;
       outerg.selectAll("path")           
           .data(data.boundary.features)
       .enter().append("path") 
+          .attr("class", "boundary")
           .attr("d", mapProjPath)
           .attr("fill", "rgb(230,230,230)")
           .attr("stroke", "rgb(200,200,200)")
@@ -120,6 +121,10 @@ var setNewProjectionSize;
               var edgeid = +d.properties.edge_id;
               return 0.1 + (getTrainCount(edgeid, hour) + getTrainCount(-edgeid, hour))/2;
             });
+
+        outerg.selectAll("path.boundary")
+            .attr("d", mapProjPath);
+
       }
 
       update();
