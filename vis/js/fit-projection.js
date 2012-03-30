@@ -55,5 +55,5 @@ function fitProjection(projection, data, box, center) {
             transX = transX - (transX + startbox[1][0] * scale - box[1][0])/2;
         }
     }
-    return projection.scale(scale).translate([transX, transY])
+    return projection.scale(scale).translate([transX, transY]);
 }
