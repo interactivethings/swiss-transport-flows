@@ -18,7 +18,7 @@
 
       d3.json('data/edges-sbb.json', function(data) {
         var mapProj = d3.geo.mercator();
-        //mapProj.translate([0,0]);
+        mapProj.translate([0,0]);
         //mapProj.scale(1);
         var mapProjPath = d3.geo.path().projection(mapProj);
         vis.selectAll('path')
