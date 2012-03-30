@@ -1,22 +1,47 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script type="text/javascript" src="http://mbostock.github.com/d3/d3.v2.js"></script>
+    
+	<style type="text/css">
+		@import url("http://polymaps.org/style.css");
+		
+		html, body {
+		  height: 100%;
+		  width:100%;
+		  background: #E6E6E6;
+		  margin: 0;
+		  font: 10px sans-serif;
+		  min-height:600px;
+		  min-width:1000px;
+		}
+		
+		svg {
+		  display:block;
+		}
+		
+		circle {
+		  stroke:black;
+		  fill:brown;
+		  fill-opacity:.5;
+		}
+		
+		div#map {
+		  position:absolute;
+		  top:50%;
+		  left:50%;
+		  width:900px;
+		  height:600px;
+		  margin:-300px 0 0 -450px;
+		}
+		#map svg {
+		}
+    </style>
   </head>
   <body>
-    <div id="chart"></div>
-    <script type="text/javascript">
-
-
-
-      var width = 800, height = 600;      
-
-      var vis = d3.select("#chart").append("svg:svg")
-          .attr("width", width)
-          .attr("height", height);
-
-
-    </script>
+    <div id="map"></div>
+	<script type="text/javascript" src="http://mbostock.github.com/d3/d3.v2.js"></script>
+    <script type="text/javascript" src="http://polymaps.org/polymaps.min.js?2.5.0"></script>
+    <script type="text/javascript" src="js/init-map.js"></script>
     <script type="text/javascript" src="js/fit-projection.js"></script>
     <script type="text/javascript" src="js/load-data.js"></script>
     <script type="text/javascript" src="js/railways.js"></script>
