@@ -70,19 +70,16 @@ var setNewProjectionSize;
           ;
 
 
-          /*
-      outerg.selectAll('path.stations')
+      outerg.selectAll('circle.stations')
           .data(data.stations.features)
         .enter().append('circle')
           .attr('class', 'stations')
-          .attr('cx', function(d) { return mapProj(d.geometry.coordinates)[0]; })
-          .attr('cy', function(d) { return mapProj(d.geometry.coordinates)[1]; })
           .attr('r', 1)
-          .attr('stroke', 'blue')
-          .attr('opacity', '.5')
+         // .attr('stroke', 'blue')
+          //.attr('opacity', '.5')
           //.attr('fill', 'blue')
           ;
-          */
+ 
 
         
 
@@ -119,8 +116,14 @@ var setNewProjectionSize;
             .duration(500)
             .attr('stroke-width', function(d, i) {
               var edgeid = +d.properties.edge_id;
-              return 0.1 + (getTrainCount(edgeid, hour) + getTrainCount(-edgeid, hour))/2;
+              return 0.1 + 
+                (getTrainCount(edgeid, hour) + getTrainCount(-edgeid, hour))/3;
             });
+
+      outerg.selectAll('circle.stations')
+          .attr('cx', function(d) { return mapProj(d.geometry.coordinates)[0]; })
+          .attr('cy', function(d) { return mapProj(d.geometry.coordinates)[1]; })
+
 
         outerg.selectAll("path.boundary")
             .attr("d", mapProjPath);
