@@ -14,11 +14,11 @@ $(document).bind('stf-ready', function(){
     
     // Add the CloudMade image tiles as a base layer…
     map.add(po.image()    
-	/*.url(po.url("http://{S}tile.cloudmade.com"
+	.url(po.url("http://{S}tile.cloudmade.com"
      + "/1a1b06b230af4efdbb989ea99e9841af" // http://cloudmade.com/register
      + "/45763/256/{Z}/{X}/{Y}.png")
-     .hosts(["a.", "b.", "c.", ""]))*/
-    .url("http://s3.amazonaws.com/com.modestmaps.bluemarble/{Z}-r{Y}-c{X}.jpg")
+     .hosts(["a.", "b.", "c.", ""]))
+    //.url("http://s3.amazonaws.com/com.modestmaps.bluemarble/{Z}-r{Y}-c{X}.jpg")
 	);
     
     // Add the compass control on top.
