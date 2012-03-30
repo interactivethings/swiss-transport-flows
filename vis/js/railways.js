@@ -16,18 +16,22 @@
           });
 */
 
-      d3.json('data/edges-sbb.json', function(data) {
-        var mapProj = d3.geo.mercator();
-        mapProj.translate([0,0]);
-        //mapProj.scale(1);
-        var mapProjPath = d3.geo.path().projection(mapProj);
-        vis.selectAll('path')
-            .data(data.features)
-          .enter().append('path')
-            .attr('d', mapProjPath)
-            .attr('stroke', '#ccc')
-            .attr('stroke-opacity', '.5')
-            .attr('fill', '#eee');
-        
+      d3.loadData()
+        .json('segments', 'data/edges-sbb.json')
+        .onload(function(data) {
+          var mapProj = d3.geo.mercator();
+          //mapProj.translate([0,0]);
+          //mapProj.scale(1);
+          
+          fitProjection(mapProj, data.segments, [[0,0],[width, height]], true);
 
-      });
+          var mapProjPath = d3.geo.path().projection(mapProj);
+          vis.selectAll('path')
+              .data(data.segments.features)
+            .enter().append('path')
+              .attr('d', mapProjPath)
+              .attr('stroke', 'black')
+              .attr('stroke-opacity', '.5')
+              .attr('fill', 'none');
+        });
+
