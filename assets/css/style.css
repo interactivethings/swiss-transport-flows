@@ -9,10 +9,8 @@ html, body {
   height: 100%;
 }
 a:link,
-a:visited,
-label {
+a:visited{
   color: #e00;
-  margin-left: 10px;
 }
 label:hover {
   text-decoration: underline;
@@ -42,7 +40,45 @@ div#map {
   stroke-linecap:round;
   opacity: 1;
 }
+.compass .back {
+  fill: #ddd;
+  fill-opacity: 0.8;
+}
 
+.compass .fore {
+  stroke: #999;
+  stroke-width: 0px;
+}
+
+.compass rect.back.fore {
+  fill: #999;
+  fill-opacity: .3;
+  stroke: #eee;
+  stroke-width: 1px;
+  shape-rendering: crispEdges;
+}
+
+.compass .direction {
+  fill: none;
+}
+
+.compass .chevron {
+  fill: none;
+  stroke: #999;
+  stroke-width: 5px;
+}
+
+.compass .zoom .chevron {
+  stroke-width: 4px;
+}
+
+.compass .active .chevron, .compass .chevron.active {
+  stroke: #fff;
+}
+
+.compass.active .active .direction {
+  fill: #999;
+}
 
 /* ==========================================================================
    OVERLAY
@@ -116,12 +152,6 @@ div#map {
 .last{
   border-bottom: none;
 }
-#focus ul {
-    padding: 0 0 0 20px;
-}
-#focus li {
-  list-style: none;
-}
 /* ==========================================================================
    SECTIONS
    ==========================================================================
@@ -136,6 +166,9 @@ div#map {
 }
 #title p{
   margin-bottom: 0;
+}
+#title a{
+  color: #222;
 }
 #title #panel_toggle{
   background: url(images/icon_sprite.png) 0 -200px no-repeat;
@@ -232,4 +265,17 @@ div#map {
 }
 #time #time_slider{
   margin: 2px 0 0 26px;
+}
+/* FOCUS */
+#focus{
+}
+#focus ul{
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+#focus ul li{
+  list-style: none;
+  float: left;
+  width: 50%;
 }
