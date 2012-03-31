@@ -38,7 +38,7 @@ var setNewProjectionSize;
 
     setNewProjectionSize = function(width, height) {
     	fitProjection(mapProj, data.segments, [[0,0],[width, height]], true);
-			if(update) update();
+			if(update) updateProjection();
 		}
 		setNewProjectionSize(width, height);
 
@@ -124,11 +124,22 @@ var setNewProjectionSize;
       $('#showStationsChk').click(function() { updateVisibility(); });
       $('#showRailwaysChk').click(function() { updateVisibility(); });
 
+      function updateProjection() {
+        outerg.selectAll('path.segments')
+          .attr('d', mapProjPath);
+
+        outerg.selectAll('circle.stations')
+          .attr('cx', function(d) { return mapProj(d.geometry.coordinates)[0]; })
+          .attr('cy', function(d) { return mapProj(d.geometry.coordinates)[1]; })
+          ;
+        outerg.selectAll("path.boundary")
+            .attr("d", mapProjPath);
+      }
+
       function update() {
         var hour = getSelectedHour();
         var hourText = hour + ':00 - ' + (hour+1) + ':00';
         $('#hourLabel').html(hourText);
-
 
         outerg.selectAll('path.segments')
           .attr('d', mapProjPath)
@@ -140,22 +151,17 @@ var setNewProjectionSize;
                 (getTrainCount(edgeid, hour) + getTrainCount(-edgeid, hour))/3;
             });
 
-      outerg.selectAll('circle.stations')
-        .attr('cx', function(d) { return mapProj(d.geometry.coordinates)[0]; })
-        .attr('cy', function(d) { return mapProj(d.geometry.coordinates)[1]; })
-        .transition()
-          .duration(500)
-          .attr('r', function(d, i) {
-            var station_id = +d.properties.station_id;
-            return 0.1 + Math.sqrt(getStationTrainCount(station_id, getSelectedHour()));
-          });
-
-
-        outerg.selectAll("path.boundary")
-            .attr("d", mapProjPath);
+        outerg.selectAll('circle.stations')
+          .transition()
+            .duration(500)
+            .attr('r', function(d, i) {
+              var station_id = +d.properties.station_id;
+              return 0.1 + Math.sqrt(getStationTrainCount(station_id, getSelectedHour()));
+            });
 
       }
 
+      updateProjection();
       update();
 
       $('svg circle.stations').tipsy({ 
