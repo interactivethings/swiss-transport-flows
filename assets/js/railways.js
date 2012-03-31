@@ -1,4 +1,4 @@
-var setNewProjectionSize;
+var setNewProjectionSize, updateArrivals;
 
 (function() {
 
@@ -50,10 +50,10 @@ var setNewProjectionSize;
       .onload(function(data) {
 
 
-        var outerg = vis.append('g').attr('id', 'bboxg');
-        var mapProj = d3.geo.mercator();
-        //mapProj.translate([0,0]);
-        //mapProj.scale(1);
+    var outerg = vis.append('g').attr('id', 'bboxg');
+    var mapProj = d3.geo.mercator();
+    //mapProj.translate([0,0]);
+    //mapProj.scale(1);
 
 
 
@@ -302,11 +302,47 @@ var setNewProjectionSize;
 
       releaseMap();
 
+
+      /*
+      d3.json('data/station_arrivals.json', function(arrivalsData) {
+
+        updateArrivals = function (minutes) {
+          $('#hourLabel').html( 
+            Math.floor((minutes  / 60) % 24) + ':' +  (minutes % 60)
+          );
+          var minutesInDay = 24 * 60;
+
+          outerg.selectAll('circle.stations')
+            .transition()
+              .duration(1500)
+              .attr('fill', 'green')
+              .attr('r', function(d, i) {
+                var station_id = d.properties.station_id;
+                var data = arrivalsData[minutes * 60];
+                if (data !== undefined) {
+                  if (data[station_id] !== undefined) {
+                    return Math.sqrt(data[station_id] * 50);
+                  }
+                }
+                return 0;
+              });
+          if (minutes < minutesInDay) {
+            setTimeout("updateArrivals("+(minutes+1)+")", 1000);
+          }
+
+        }
+        updateArrivals(60 * 10);
+
+
+      });
+*/
+
+
     });
 
     function releaseMap() {
       $('#overlay').hide();
-      var logoPos = $('#logo').position();
+      /*var logoPos = $('#logo').position();
       $('#logo')
         .css('top', logoPos.top)
         .css('right', $(window).width() - logoPos.left - $('#logo').width() / 2)
@@ -326,6 +362,7 @@ var setNewProjectionSize;
         .animate({
           top: '266'
         }, 1800)
+    */
     }
 
 })();

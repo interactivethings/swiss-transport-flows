@@ -34,7 +34,7 @@ div#map {
 }
 
 #map circle {
-  fill:red;
+/*  fill:red;*/
   opacity: 1;
 }
 
