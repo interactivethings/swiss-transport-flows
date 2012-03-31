@@ -161,12 +161,13 @@ def generate_station_freq_csv(data):
     for station, arr_dep in stations.iteritems():
         for hour, ids in arr_dep.get('arr', {}).iteritems():
             stations_compressed.setdefault(station, {}).setdefault('arr', {})[hour] = len(ids)
-        for hour, ids in arr_dep.get('arr', {}).iteritems():
-            stations_compressed.setdefault(station, {}).setdefault('arr', {})[hour] = len(ids)
+        for hour, ids in arr_dep.get('dep', {}).iteritems():
+            stations_compressed.setdefault(station, {}).setdefault('dep', {})[hour] = len(ids)
     for station, arr_dep in stations_compressed.iteritems():
         record = [station]
         for h in range(24):
             record.append(arr_dep.get('arr', {}).get(h, 0))
+        for h in range(24):
             record.append(arr_dep.get('dep', {}).get(h, 0))
         writer.writerow(record)
 
