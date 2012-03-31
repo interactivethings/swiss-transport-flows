@@ -98,6 +98,11 @@ div#map {
 #title p{
   margin-bottom: 0;
 }
+#title #panel_toggle{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
 #location{
   position: relative;
 }
