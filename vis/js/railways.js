@@ -63,6 +63,71 @@ var setNewProjectionSize;
             updateHour();
           }
         });
+        
+        $("#slider").slider.prototype.nextStep = function() {
+            console.log("called next step");
+            if(value < max){
+                 this.slider( "option" , "value", value + step);
+             }else{
+                 this.slider( "option" , "value", min);
+             }
+        };
+        
+        var animateSlider = (function(){
+            var s = $("#slider");
+            var p = $("#play");
+            
+            var running = false;
+            
+            
+            function toggle() {
+                console.log("toggleling" + running);
+                if(running)
+                    stop();
+                else
+                    start();
+            };
+            
+            function start() {
+                running = true;
+                p.val("pause");
+                run();
+            };
+            
+            function stop() {
+                running = false;
+                p.val("play");
+            };
+            
+            function run() {
+                console.log("called running");
+                if (!running)
+                    return;
+                
+                var sValue = s.slider( "option" , "value" );
+                var sMin = s.slider( "option" , "min" );
+                var sMax = s.slider( "option" , "max" );
+                var sStep = s.slider( "option" , "step" );
+                
+                if(sValue < sMax){
+                     s.slider( "option" , "value", sValue + sStep);
+                 }else{
+                     s.slider( "option" , "value", sMin);
+                 }
+                 setTimeout(run, 1000);
+            }
+            
+            return {
+                toggle: toggle
+            };
+        })();
+        
+        
+         $("#play").click(  function(e, ui) {
+                animateSlider.toggle();
+              });
+
+
 
 
       $('g#bboxg').data('bbox', bbox(data));
