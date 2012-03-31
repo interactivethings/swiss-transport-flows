@@ -71,6 +71,7 @@ div#map {
 }
 
 #panel p{
+  font-size: 14px;
   margin: 0 0 1em;
 }
 .section{
@@ -92,17 +93,21 @@ div#map {
    SECTIONS
    ==========================================================================
 */
-#title{
-  
-}
+/* TITLE */
 #title p{
   margin-bottom: 0;
 }
 #title #panel_toggle{
+  background: url(images/icon_sprite.png) 0 0 no-repeat;
+  width: 18px;
+  height: 18px;
+  text-indent: -9999px;
   position: absolute;
-  top: 10px;
   right: 10px;
+  top: 10px;
 }
+
+/* LOCATION */
 #location{
   position: relative;
 }
