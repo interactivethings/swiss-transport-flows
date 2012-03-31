@@ -369,26 +369,5 @@ var setNewProjectionSize, updateArrivals, arrivalsAnimPlaying;
 
     function releaseMap() {
       $('#overlay').hide();
-      /*var logoPos = $('#logo').position();
-      $('#logo')
-        .css('top', logoPos.top)
-        .css('right', $(window).width() - logoPos.left - $('#logo').width() / 2)
-        .animate({
-            top: '15px',
-            right: '52px',
-            marginRight: '0',
-            marginTop: '0'
-          }, 1800, function() {
-            $(this).animate({
-              top: '20px',
-              right: '57px'
-            }, 100)
-          // Animation complete.
-      });
-      $('#panel')
-        .animate({
-          top: '266'
-        }, 1800)
-    */
     }
 

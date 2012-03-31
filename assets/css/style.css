@@ -91,15 +91,6 @@ div#map {
     background-color: rgba(0,0,0,0.5);
     z-index: 100;
 }
-#logo {
-    position: absolute;
-    z-index: 103;
-    top: 50%;
-    right: 50%;
-    margin-right: -110px;
-    margin-top: -110px;
-}
-
 /* ==========================================================================
    PANEL
    ==========================================================================
@@ -140,6 +131,9 @@ div#map {
 .section{
   border-bottom: 1px solid #ddd;
   padding: 10px 10px 20px;
+}
+.folded .section{
+  border-bottom: none;
 }
 .section .ui{
   background-color: #eee;
