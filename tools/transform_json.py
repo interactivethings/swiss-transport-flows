@@ -20,7 +20,10 @@ def load_distances():
 def calculate_distance(edges, distances):
     retval = 0
     for edge in edges:
-        retval += distances.get(edge, 0)
+        if edge.startswith("-"):
+            retval += distances.get(edge[1:], 0)
+        else:
+            retval += distances.get(edge, 0)
     return retval
 
 
@@ -46,11 +49,13 @@ def generate_station_hours(data):
         departures = departures + [arrivals[-1]]
         for idx, station in enumerate(item['sts']):
             stations.setdefault(station, {})
-            arrival_hour = str(arrivals[idx] / 3600)
-            departure_hour = str(arrivals[idx] / 3600)
-            stations[station].setdefault(arrival_hour, []).append(item['id'])
+            arrival_hour = arrivals[idx] / 3600
+            departure_hour = departures[idx] / 3600
+            if arrival_hour <= 23:
+                stations[station].setdefault(arrival_hour, []).append(item['id'])
             if arrival_hour != departure_hour:
-                stations[station].setdefault(departure_hour, []).append(item['id'])
+                if departure_hour <= 23:
+                    stations[station].setdefault(departure_hour, []).append(item['id'])
     out = open('station_hours.json','wb')
     json.dump(stations, out)
     stations_compressed = {}
@@ -113,7 +118,7 @@ def generate_train_speeds(data, distances):
             if not edges_str:
                 continue
             arrival = arrivals[idx - 1]
-            departure = arrivals[idx - 1]
+            departure = departures[idx - 1]
             edges = edges_str.split(",")
             distance = calculate_distance(edges, distances)
             travel_time = arrival - departure
@@ -122,12 +127,15 @@ def generate_train_speeds(data, distances):
                 continue
             travel_speed = float(distance)/travel_time * 3.6
             for edge in edges:
-                speed_per_edge.setdefault(edge, [])
-                speed_per_edge['edge'].append(travel_speed)
+                e = edge
+                if edge.startswith("-"):
+                    e = edge[1:]
+                speed_per_edge.setdefault(e, [])
+                speed_per_edge[e].append(travel_speed)
     avg_speeds_per_segment = {}
-    for edge, speeds in speed_per_edge:
-        avg_speeds_per_segment[edge] = sum(speeds)/len(speeds)
-    out = open('avg_speeds_per_segment.json', 'wb')
+    for edge, speeds in speed_per_edge.iteritems():
+        avg_speeds_per_segment[edge] = int(round(sum(speeds)/len(speeds)))
+    out = open('avg_speeds_per_edge.json', 'wb')
     json.dump(avg_speeds_per_segment, out)
 
 
