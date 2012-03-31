@@ -1,4 +1,4 @@
-var width = window.innerWidth, height = 600;
+var width = window.innerWidth, height = window.innerHeight;
 var vis = d3.select("#map").append("svg:svg").attr('width', width).attr('height', height);
 
 var po = org.polymaps;
