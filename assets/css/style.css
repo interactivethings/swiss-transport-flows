@@ -32,7 +32,7 @@ div#map {
 }
 
 #map circle {
-  fill:red;
+  fill:black;
   opacity: 1;
 }
 
