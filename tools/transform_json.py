@@ -7,11 +7,13 @@ import csv
 def main(vehicle_json_file_dir):
     distances = load_distances()
     data = load_data(vehicle_json_file_dir)
+    station_names = load_station_mapping()
     generate_station_hours(data)
     generate_edge_hours(data)
     generate_station_arrivals(data)
     generate_train_speeds(data, distances)
-    generate_station_freq_csv(data)
+    generate_station_freq_csv(data, station_names)
+    generate_route_speed_csv(data, distances, station_names)
 
 
 def load_distances():
@@ -141,6 +143,33 @@ def generate_train_speeds(data, distances):
     json.dump(avg_speeds_per_segment, out)
 
 
+def generate_route_speed_csv(data, distances, station_names):
+    speed_per_route = []
+    for item in data:
+        arrivals = item['arrs']
+        departures = item['deps']
+        for idx, edges_str in enumerate(item['edges']):
+            if not edges_str:
+                continue
+            arrival = arrivals[idx - 1]
+            departure = departures[idx - 1]
+            edges = edges_str.split(",")
+            distance = calculate_distance(edges, distances)
+            travel_time = arrival - departure
+            if travel_time == 0:
+                print 'travel_time is zero, bailing out'
+                continue
+            travel_speed = int(round(float(distance)/travel_time * 3.6))
+            first_station = station_names.get(item['sts'][idx - 1])
+            second_station = station_names.get(item['sts'][idx])
+            if first_station and second_station and (travel_time > 120) and (distance > 10000):
+                speed_per_route.append((first_station, second_station, travel_speed, distance, travel_time))
+    writer = csv.writer(open('route_speed.csv', 'wb'))
+    writer.writerow(['from_station', 'to_station', 'speed(km/h)', 'distance(m)', 'travel_time(seconds)'])
+    for from_station, to_station, speed, distance, travel_time in speed_per_route:
+        writer.writerow([from_station, to_station, speed, distance, travel_time])
+
+
 def load_station_mapping():
     station_names = {}
     data = json.load(open('../../vehicle-simulator/static/geojson/stations-sbb.json'))
@@ -150,12 +179,9 @@ def load_station_mapping():
     return station_names
 
 
-
-# station-nr, 0, 1, 2, 3, 4
-def generate_station_freq_csv(data):
+def generate_station_freq_csv(data, station_names):
     writer = csv.writer(open('station_freq.csv', 'wb'))
     stations = {}
-    station_names = load_station_mapping()
     for item in data:
         arrivals = item['arrs']
         departures = item['deps']
