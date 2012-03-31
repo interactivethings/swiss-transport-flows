@@ -28,6 +28,7 @@ var setNewProjectionSize;
       .json('boundary', '../data/switzerland_boundaries.json')
       .json('trains',  '../data/edge_hours_compressed.json')
       .json('stationTrainsByHour',  '../data/station_hours_compressed.json')
+      .json('speeds',  '../data/avg_speeds_per_edge.json')
       .onload(function(data) {
         var outerg = vis.append('g').attr('id', 'bboxg');
         var mapProj = d3.geo.mercator();
@@ -42,8 +43,11 @@ var setNewProjectionSize;
 		}
 		setNewProjectionSize(width, height);
 
-  
-      
+/*
+      var speedColorScale = d3.scale.linear()
+        .domain([-1, 0, 1])
+        .range(["red", "white", "green"]);
+  */    
 
       $("#slider")
         .slider({ 
@@ -74,7 +78,8 @@ var setNewProjectionSize;
           .attr("stroke-width", "0.5");
 
 
-      outerg.selectAll('path.segments')
+      var segmentsGroup = outerg.append("g").attr('class','segments');;
+      segmentsGroup.selectAll('path.segments')
           .data(data.segments.features)
         .enter().append('path')
           .attr('class', 'segments')
@@ -99,7 +104,8 @@ var setNewProjectionSize;
           return 0;
         }
 
-      outerg.selectAll('circle.stations')
+      var stationsGroup = outerg.append("g").attr('class','stations');
+      stationsGroup.selectAll('circle.stations')
           .data(data.stations.features)
         .enter().append('circle')
           .attr('class', 'stations')
@@ -116,9 +122,9 @@ var setNewProjectionSize;
       }
 
       function updateVisibility() {
-        outerg.selectAll('circle.stations')
+        outerg.selectAll('g.stations')
           .attr("visibility", $('#showStationsChk').is(':checked') ? 'visible' : 'hidden');
-        outerg.selectAll('path.segments')
+        outerg.selectAll('g.segments')
           .attr("visibility", $('#showRailwaysChk').is(':checked') ? 'visible' : 'hidden');
       }
       $('#showStationsChk').click(function() { updateVisibility(); });
@@ -136,29 +142,39 @@ var setNewProjectionSize;
             .attr("d", mapProjPath);
       }
 
+
       function updateHour() {
         var hour = getSelectedHour();
         var hourText = hour + ':00 - ' + (hour+1) + ':00';
         $('#hourLabel').html(hourText);
 
-        outerg.selectAll('path.segments')
-          .attr('d', mapProjPath)
-          .transition()
-            .duration(500)
-            .attr('stroke-width', function(d, i) {
-              var edgeid = +d.properties.edge_id;
-              return 0.1 + 
-                (getTrainCount(edgeid, hour) + getTrainCount(-edgeid, hour))/3;
-            });
+        var segmentsGroup = outerg.selectAll('g.segments');
+        if (segmentsGroup.attr('visibility') != 'hidden') {
+          outerg.selectAll('path.segments')
+            .transition()
+              .duration(500)
+              .attr('stroke-width', function(d, i) {
+                var edgeid = +d.properties.edge_id;
+                return 0.1 + 
+                  (getTrainCount(edgeid, hour) + getTrainCount(-edgeid, hour))/3;
+              })
+              .attr('stroke-color', function(d, i) {
+                var edgeid = +d.properties.edge_id;
+                data.speeds[edgeid]
+              })
+              ;
+          }
 
-        outerg.selectAll('circle.stations')
-          .transition()
-            .duration(500)
-            .attr('r', function(d, i) {
-              var station_id = +d.properties.station_id;
-              return 0.1 + Math.sqrt(getStationTrainCount(station_id, getSelectedHour()));
-            });
-
+        var stationsGroup = outerg.selectAll('g.stations');
+        if (stationsGroup.attr('visibility') != 'hidden') {
+          outerg.selectAll('circle.stations')
+            .transition()
+              .duration(500)
+              .attr('r', function(d, i) {
+                var station_id = +d.properties.station_id;
+                return 0.1 + Math.sqrt(getStationTrainCount(station_id, getSelectedHour()));
+              });
+        }
       }
 
       updateProjection();
