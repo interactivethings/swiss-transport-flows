@@ -122,6 +122,7 @@ var setNewProjectionSize;
       }
 
       function updateVisibility() {
+        updateHour(true);
         outerg.selectAll('g.stations')
           .attr("visibility", $('#showStationsChk').is(':checked') ? 'visible' : 'hidden');
         outerg.selectAll('g.segments')
@@ -143,16 +144,16 @@ var setNewProjectionSize;
       }
 
 
-      function updateHour() {
+      function updateHour(force) {
         var hour = getSelectedHour();
         var hourText = hour + ':00 - ' + (hour+1) + ':00';
         $('#hourLabel').html(hourText);
 
         var segmentsGroup = outerg.selectAll('g.segments');
-        if (segmentsGroup.attr('visibility') != 'hidden') {
+        if (force || segmentsGroup.attr('visibility') != 'hidden') {
           outerg.selectAll('path.segments')
             .transition()
-              .duration(500)
+              .duration(force ? 0 : 500)
               .attr('stroke-width', function(d, i) {
                 var edgeid = +d.properties.edge_id;
                 return 0.1 + 
@@ -166,10 +167,10 @@ var setNewProjectionSize;
           }
 
         var stationsGroup = outerg.selectAll('g.stations');
-        if (stationsGroup.attr('visibility') != 'hidden') {
+        if (force || stationsGroup.attr('visibility') != 'hidden') {
           outerg.selectAll('circle.stations')
             .transition()
-              .duration(500)
+              .duration(force ? 0 : 500)
               .attr('r', function(d, i) {
                 var station_id = +d.properties.station_id;
                 return 0.1 + Math.sqrt(getStationTrainCount(station_id, getSelectedHour()));
