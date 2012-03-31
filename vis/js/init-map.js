@@ -8,8 +8,8 @@ $(document).bind('stf-ready', function(){
     
     // Create the map object, add it to #map…
     var map = po.map().container(vis.node()).zoom(8).center({
-        lat: 46.801111,
-        lon: 8.226667
+        lat: 46.5,
+        lon: 9
     }).add(po.interact());
     
     // Add the CloudMade image tiles as a base layer…
