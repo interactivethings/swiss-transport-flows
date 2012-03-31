@@ -138,13 +138,28 @@ div#map {
   margin-bottom: 0;
 }
 #title #panel_toggle{
-  background: url(images/icon_sprite.png) 0 0 no-repeat;
+  background: url(images/icon_sprite.png) 0 -200px no-repeat;
   width: 18px;
   height: 18px;
   text-indent: -9999px;
   position: absolute;
   right: 10px;
   top: 10px;
+}
+#title #panel_toggle:hover{
+  background-position: -68px -200px;
+}
+#title #panel_toggle:active{
+  background-position: -136px -200px;
+}
+.folded #title #panel_toggle{
+  background: url(images/icon_sprite.png) 0 -250px no-repeat;
+}
+.folded #title #panel_toggle:hover{
+  background-position: -68px -250px;
+}
+.folded #title #panel_toggle:active{
+  background-position: -136px -250px;
 }
 
 /* LOCATION */
@@ -153,8 +168,17 @@ div#map {
 }
 #location #location_btn{
   position: absolute;
-  top: 47px;
-  left: 14px;
+  background: url(images/icon_sprite.png) 0 0 no-repeat;
+  width: 18px;
+  height: 18px;
+  margin: 17px 0 0 7px;
+  text-indent: -9999px;
+}
+#location #location_btn:hover{
+  background-position: -68px 0;
+}
+#location #location_btn:active{
+  background-position: -136px 0;
 }
 #location #location_txt{
   background-color: #fff;
@@ -168,4 +192,44 @@ div#map {
   -webkit-box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
   box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
+}
+/* TIME */
+#time{
+  position: relative;
+}
+#time h2 span{
+  float: right;
+  text-align: right;
+  width: 50%;
+  font-weight: normal;
+}
+#time .ui{
+  height: 18px;
+}
+#time #time_play_btn{
+  background: url(images/icon_sprite.png) 0 -50px no-repeat;
+  display: block;
+  float: left;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  text-indent: -9999px;
+}
+#time #time_play_btn:hover{
+  background-position: -68px -50px;
+}
+#time #time_play_btn:active{
+  background-position: -136px -50px;
+}
+#time #time_play_btn.running{
+  background-position: -136px -100px;
+}
+#time #time_play_btn.running:hover{
+  background-position: -68px -100px;
+}
+#time #time_play_btn.running:active{
+  background-position: -68px -100px;
+}
+#time #time_slider{
+  margin: 2px 0 0 26px;
 }
