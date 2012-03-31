@@ -24,6 +24,8 @@
       opacity:0.5;
 		}
 		
+		
+		
 		div#map {
 		  position:absolute;
 		  top:50%;
@@ -56,6 +58,10 @@
     <input type="checkbox" id="showRailwaysChk" checked>
     <label for="showRailwaysChk">Show railways</label>
 
+	<input type="radio" name="mapType" id="mapTypeOSM" value="osm" checked="checked" />
+	<label for="mapTypeOSM">OpenStreetMap</label>
+	<input type="radio" name="mapType" id="mapTypeBM" value="bluemarble" />
+	<label for="mapTypeBM">Blue Marble</label>
 
     <div id="map"></div>
 	

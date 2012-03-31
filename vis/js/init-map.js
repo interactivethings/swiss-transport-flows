@@ -2,6 +2,7 @@ var width = 900, height = 600;
 var vis = d3.select("#map").append("svg:svg").attr('width', width).attr('height', height);
 
 var po = org.polymaps;
+var poMapType;
 
 $(document).bind('stf-ready', function(){
     var curZoomLevel;
@@ -13,24 +14,52 @@ $(document).bind('stf-ready', function(){
     }).add(po.interact());
     
     // Add the CloudMade image tiles as a base layer…
-    map.add(po.image()    
+	var mapTiles;
+	
+    /*map.add(mapTiles /*po.image()    
 	.url(po.url("http://{S}tile.cloudmade.com"
      + "/1a1b06b230af4efdbb989ea99e9841af" // http://cloudmade.com/register
      + "/45763/256/{Z}/{X}/{Y}.png")
-     .hosts(["a.", "b.", "c.", ""]))
+     .hosts(["a.", "b.", "c.", ""]))*/
     //.url("http://s3.amazonaws.com/com.modestmaps.bluemarble/{Z}-r{Y}-c{X}.jpg")
-	);
+	//);
     
+	
     // Add the compass control on top.
     map.add(po.compass().pan("none"));
-    
-    vis.selectAll("path.segments")
-    
-    //$('g#bboxg').data('bbox');
+	
+	//$('g#bboxg').data('bbox');
     
     var $bboxg = $('g#bboxg'), bboxg = $bboxg.get(0);
     var $compass = $('g.compass'), compass = $compass.get(0);
     var bounds = $bboxg.data('bbox');
+	//console.log(bounds);
+	
+	$('input[name="mapType"]').change(function() {
+		var newMapTiles, val = $('input[name="mapType"]:checked').val();
+		if(val == 'osm') {
+			newMapTiles = po.image()    
+			.url(po.url("http://{S}tile.cloudmade.com"
+		     + "/1a1b06b230af4efdbb989ea99e9841af" // http://cloudmade.com/register
+		     + "/45763/256/{Z}/{X}/{Y}.png")
+		     .hosts(["a.", "b.", "c.", ""]));
+		}
+		else {
+			newMapTiles = po.image()    
+			.url("http://s3.amazonaws.com/com.modestmaps.bluemarble/{Z}-r{Y}-c{X}.jpg");
+		}
+		map.add(newMapTiles);
+		if(mapTiles) {
+			map.remove(mapTiles);
+		}
+		
+        bboxg.parentNode.appendChild(bboxg);
+		compass.parentNode.appendChild(compass);
+		
+		poMapType = val;
+		mapTiles = newMapTiles;
+	}).change();
+	
     
     var zoomChange = function(){
         var topLeft = map.locationPoint({
