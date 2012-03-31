@@ -56,7 +56,7 @@ div#map {
   font-size: 18px;
   color: #e00;
   line-height: 1;
-  margin: 10px 0;
+  margin: 10px 0 6px;
 }
 
 #panel h2{
@@ -76,7 +76,7 @@ div#map {
 */
 .section{
   border-bottom: 1px solid #ddd;
-  padding: 10px;
+  padding: 10px 10px 20px;
 }
 .section .ui{
   background-color: #eee;
@@ -85,6 +85,12 @@ div#map {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
+}
+#title{
+  
+}
+#title p{
+  margin-bottom: 0;
 }
 #location{
   position: relative;
