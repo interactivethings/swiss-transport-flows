@@ -152,12 +152,6 @@ div#map {
 .last{
   border-bottom: none;
 }
-#focus ul {
-    padding: 0 0 0 20px;
-}
-#focus li {
-  list-style: none;
-}
 /* ==========================================================================
    SECTIONS
    ==========================================================================
@@ -271,4 +265,17 @@ div#map {
 }
 #time #time_slider{
   margin: 2px 0 0 26px;
+}
+/* FOCUS */
+#focus{
+}
+#focus ul{
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+#focus ul li{
+  list-style: none;
+  float: left;
+  width: 50%;
 }
