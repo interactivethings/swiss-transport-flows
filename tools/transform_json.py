@@ -2,6 +2,7 @@ import json
 import os
 import sys
 import glob
+import csv
 
 def main(vehicle_json_file_dir):
     distances = load_distances()
@@ -10,6 +11,7 @@ def main(vehicle_json_file_dir):
     generate_edge_hours(data)
     generate_station_arrivals(data)
     generate_train_speeds(data, distances)
+    generate_station_freq_csv(data)
 
 
 def load_distances():
@@ -138,7 +140,35 @@ def generate_train_speeds(data, distances):
     out = open('avg_speeds_per_edge.json', 'wb')
     json.dump(avg_speeds_per_segment, out)
 
-
+# station-nr, 0, 1, 2, 3, 4
+def generate_station_freq_csv(data):
+    writer = csv.writer(open('station_freq.csv', 'wb'))
+    stations = {}
+    for item in data:
+        arrivals = item['arrs']
+        departures = item['deps']
+        arrivals = [departures[0]] + arrivals
+        departures = departures + [arrivals[-1]]
+        for idx, station in enumerate(item['sts']):
+            stations.setdefault(station, {})
+            arrival_hour = arrivals[idx] / 3600
+            departure_hour = departures[idx] / 3600
+            if arrival_hour <= 23:
+                stations[station].setdefault('arr', {}).setdefault(arrival_hour, []).append(item['id'])
+            if departure_hour <= 23:
+                stations[station].setdefault('dep', {}).setdefault(departure_hour, []).append(item['id'])
+    stations_compressed = {}
+    for station, arr_dep in stations.iteritems():
+        for hour, ids in arr_dep.get('arr', {}).iteritems():
+            stations_compressed.setdefault(station, {}).setdefault('arr', {})[hour] = len(ids)
+        for hour, ids in arr_dep.get('arr', {}).iteritems():
+            stations_compressed.setdefault(station, {}).setdefault('arr', {})[hour] = len(ids)
+    for station, arr_dep in stations_compressed.iteritems():
+        record = [station]
+        for h in range(24):
+            record.append(arr_dep.get('arr', {}).get(h, 0))
+            record.append(arr_dep.get('dep', {}).get(h, 0))
+        writer.writerow(record)
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
