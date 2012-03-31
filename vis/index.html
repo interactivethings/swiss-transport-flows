@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
   	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    
+
     <title>Swiss Transport Flows</title>
   	<meta name="description" content="Submission for the Make.OpenData.ch Camp 2012">
   	<meta name="author" content="">
@@ -14,6 +14,9 @@
     <link href="css/style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
+    <div id="overlay"></div>
+    <img id="logo" src="make.opendata.ch_logo.png" />
+
     <div id="map"></div>
     <div id="panel" class="unfolded">
       <div class="section" id="title">
@@ -36,35 +39,43 @@
           <div id="hourLabel"></div>
         </div>
     </div>
-    <input type="checkbox" id="showStationsChk" checked>
-    <label for="showStationsChk">Show stations</label>
-
-    <input type="checkbox" id="showRailwaysChk" checked>
-    <label for="showRailwaysChk">Show railways</label>
-
-	<input type="radio" name="mapType" id="mapTypeOSM" value="osm" checked="checked" />
-	<label for="mapTypeOSM">OpenStreetMap</label>
-	<input type="radio" name="mapType" id="mapTypeBM" value="bluemarble" />
-	<label for="mapTypeBM">Blue Marble</label>
-	<input type="radio" name="mapType" id="mapTypeNone" value="none" />
-	<label for="mapTypeNone">none</label>
     <!-- Fixme -->
-      <div class="section last" id="focus">
-        <h2>Fokus</h2>
-        <!-- Use this to switch between views -->
+      <div id="focus" class="section last">
+        <h2>Focus</h2>
+
         <ul>
-          <li><a href="#" title="">Nodes</a></li>
-          <li><a href="#" title="">Edges</a></li>
-          <li><a href="#" title="">Speed</a></li>
-          <li><a href="#" title="">Capacity</a></li>
+          <li>
+            <input type="checkbox" id="showStationsChk" checked>
+            <label for="showStationsChk">Show stations</label>
+          </li>
+          <li>
+            <input type="checkbox" id="showRailwaysChk" checked>
+            <label for="showRailwaysChk">Show railways</label>
+          </li>
+        </ul>
+
+        <h2>Map type</h2>
+        <ul>
+          <li>
+            <input type="radio" name="mapType" id="mapTypeOSM" value="osm" checked="checked" />
+            <label for="mapTypeOSM">OpenStreetMap</label>
+          </li>
+          <li>
+            <input type="radio" name="mapType" id="mapTypeBM" value="bluemardble" />
+            <label for="mapTypeBM">Blue Marble</label>
+          </li>
+          <li>
+            <input type="radio" name="mapType" id="mapTypeNone" value="none" />
+            <label for="mapTypeNone">None</label>
+          </li>
         </ul>
       </div>
     </div>
-    
-    <script type="text/javascript" src="lib/jquery-1.6.2.min.js"></script>   
+
+    <script type="text/javascript" src="lib/jquery-1.6.2.min.js"></script>
     <script type="text/javascript" src="lib/jquery.tipsy.js"></script>
     <script type="text/javascript" src="lib/jquery-ui.min.js"></script>
-	
+
   	<script type="text/javascript" src="lib/d3.v2.min.js"></script>
     <script type="text/javascript" src="lib/polymaps.min.js"></script>
     <script type="text/javascript" src="js/init-map.js"></script>
@@ -73,6 +84,6 @@
     <script type="text/javascript" src="js/load-data.js"></script>
     <script type="text/javascript" src="js/railways.js"></script>
     <script type="text/javascript" src="js/ui.js"></script>
-    
+
   </body>
 </html>

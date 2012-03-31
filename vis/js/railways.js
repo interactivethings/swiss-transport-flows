@@ -54,7 +54,7 @@ var setNewProjectionSize;
         var mapProj = d3.geo.mercator();
         //mapProj.translate([0,0]);
         //mapProj.scale(1);
- 
+
 
 
     setNewProjectionSize = function(width, height) {
@@ -78,9 +78,8 @@ var setNewProjectionSize;
           ColorBrewer.diverging.RdBu4);
       */
 
-
       $("#slider")
-        .slider({ 
+        .slider({
           orientation: 'horizontal',
           min: 0,
           max: 23,
@@ -90,7 +89,7 @@ var setNewProjectionSize;
             updateHour();
           }
         });
-        
+
         $("#slider").slider.prototype.nextStep = function() {
             console.log("called next step");
             if(value < max){
@@ -99,14 +98,14 @@ var setNewProjectionSize;
                  this.slider( "option" , "value", min);
              }
         };
-        
+
         var animateSlider = (function(){
             var s = $("#slider");
             var p = $("#play");
-            
+
             var running = false;
-            
-            
+
+
             function toggle() {
                 console.log("toggleling" + running);
                 if(running)
@@ -114,28 +113,28 @@ var setNewProjectionSize;
                 else
                     start();
             };
-            
+
             function start() {
                 running = true;
                 p.val("pause");
                 run();
             };
-            
+
             function stop() {
                 running = false;
                 p.val("play");
             };
-            
+
             function run() {
                 console.log("called running");
                 if (!running)
                     return;
-                
+
                 var sValue = s.slider( "option" , "value" );
                 var sMin = s.slider( "option" , "min" );
                 var sMax = s.slider( "option" , "max" );
                 var sStep = s.slider( "option" , "step" );
-                
+
                 if(sValue < sMax){
                      s.slider( "option" , "value", sValue + sStep);
                  }else{
@@ -143,13 +142,13 @@ var setNewProjectionSize;
                  }
                  setTimeout(run, 1000);
             }
-            
+
             return {
                 toggle: toggle
             };
         })();
-        
-        
+
+
          $("#play").click(  function(e, ui) {
                 animateSlider.toggle();
               });
@@ -163,9 +162,9 @@ var setNewProjectionSize;
       var mapProjPath = d3.geo.path().projection(mapProj);
 
 
-      outerg.selectAll("path")           
+      outerg.selectAll("path")
           .data(data.boundary.features)
-      .enter().append("path") 
+      .enter().append("path")
           .attr("class", "boundary")
           .attr("d", mapProjPath)
           .attr("fill", "rgb(230,230,230)")
@@ -210,7 +209,7 @@ var setNewProjectionSize;
             return getStationTrainCount(station_id, getSelectedHour());
           }) */;
 
-        
+
 
       function getSelectedHour() {
         return +$("#slider").slider("option", "value");
@@ -251,7 +250,7 @@ var setNewProjectionSize;
               .duration(force ? 0 : 500)
               .attr('stroke-width', function(d, i) {
                 var edgeid = +d.properties.edge_id;
-                return 0.1 + 
+                return 0.1 +
                   (getTrainCount(edgeid, hour) + getTrainCount(-edgeid, hour))/3;
               })
               .attr('stroke', function(d, i) {
@@ -276,28 +275,52 @@ var setNewProjectionSize;
       updateProjection();
       updateHour();
 
-      $('svg circle.stations').tipsy({ 
-        gravity: 'w', 
-        html: true, 
+      $('svg circle.stations').tipsy({
+        gravity: 'w',
+        html: true,
         title: function() {
           var d = this.__data__.properties;
-          return d.name + '<br>' + getStationTrainCount(d.station_id, getSelectedHour()) + ' trains'; 
+          return d.name + '<br>' + getStationTrainCount(d.station_id, getSelectedHour()) + ' trains';
         }
       });
 
-      $('svg path.segments').tipsy({ 
-        gravity: 'w', 
-        html: true, 
+      $('svg path.segments').tipsy({
+        gravity: 'w',
+        html: true,
         title: function() {
           var d = this.__data__.properties;
           var edgeid = +d.edge_id;
           return getTrainCount(edgeid, getSelectedHour()) + ' trains<br>' +
-                'Avg speed: ' + data.speeds[edgeid] + ' km/h'; 
+                'Avg speed: ' + data.speeds[edgeid] + ' km/h';
         }
       });
 
+      releaseMap();
+
     });
 
-
+    function releaseMap() {
+      $('#overlay').hide();
+      var logoPos = $('#logo').position();
+      $('#logo')
+        .css('top', logoPos.top)
+        .css('right', $(window).width() - logoPos.left - $('#logo').width() / 2)
+        .animate({
+            top: '15px',
+            right: '52px',
+            marginRight: '0',
+            marginTop: '0'
+          }, 1800, function() {
+            $(this).animate({
+              top: '20px',
+              right: '57px'
+            }, 100)
+          // Animation complete.
+      });
+      $('#panel')
+        .animate({
+          top: '266'
+        }, 1800)
+    }
 
 })();
