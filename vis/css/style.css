@@ -1,0 +1,126 @@
+/* ==========================================================================
+   LAYOUT
+   ==========================================================================
+*/
+html, body {
+  background: #fff;
+  color: #222;
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  height: 100%;
+}
+a:link,
+a:visited {
+  color: #e00;
+}
+/* ==========================================================================
+   MAP
+   ==========================================================================
+*/
+div#map {
+  background: #fff;
+  border: none;
+  width: 100%;
+}
+
+#map svg {
+  display:block;
+  width: 100%;
+}
+
+#map circle {
+  stroke:red;
+  opacity: 1;
+}
+
+#map path.segments {
+  stroke-linecap:round;
+  opacity: 1;
+}
+
+
+/* ==========================================================================
+   PANEL
+   ==========================================================================
+*/
+#panel {
+    position: absolute;
+    width: 300px;
+    right: 20px;
+    top: 20px;
+    background-color: #fff;
+    -webkit-box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.6);
+    -moz-box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.6);
+    box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.6);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+#panel h1{
+  font-size: 18px;
+  color: #e00;
+  line-height: 1;
+  margin: 10px 0 6px;
+}
+
+#panel h2{
+  font-size: 12px;
+  margin: 10px 0;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+#panel p{
+  margin: 0 0 1em;
+}
+.section{
+  border-bottom: 1px solid #ddd;
+  padding: 10px 10px 20px;
+}
+.section .ui{
+  background-color: #eee;
+  border: 1px solid #ddd;
+  padding: 6px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+.last{
+  border-bottom: none;
+}
+/* ==========================================================================
+   SECTIONS
+   ==========================================================================
+*/
+#title{
+  
+}
+#title p{
+  margin-bottom: 0;
+}
+#title #panel_toggle{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+#location{
+  position: relative;
+}
+#location #location_btn{
+  position: absolute;
+  top: 47px;
+  left: 14px;
+}
+#location #location_txt{
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-top: 1px solid #ccc;
+  padding: 7px 6px 6px 72px;
+  width: 200px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
+}

@@ -1,57 +1,41 @@
 <!DOCTYPE html>
 <html>
   <head>
-  	<style type="text/css">
-		@import url("http://polymaps.org/style.css");
-		
-		html, body {
-		  height: 100%;
-		  width:100%;
-		  background: #E6E6E6;
-		  margin: 0;
-		  font: 10px sans-serif;
-		  min-height:600px;
-		  min-width:1000px;
-		}
-		
-		svg {
-		  display:block;
-		}
-		
-		circle.stations {
-		  fill:red;
-      stroke:none;
-      opacity:0.5;
-		}
-		
-		
-		
-		div#map {
-		  position:absolute;
-		  top:50%;
-		  left:50%;
-		  width:900px;
-		  height:600px;
-		  margin:-300px 0 0 -450px;
-		}
-
-    path.segments {
-      stroke-linecap:round;
-      opacity: 1;
-    }
-
-		#map svg {
-		}
-    </style>
+    <meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Swiss Transport Flows</title>
+  	<meta name="description" content="Submission for the Make.OpenData.ch Camp 2012">
+  	<meta name="author" content="">
+  	<link href="http://polymaps.org/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/normalize.css" rel="stylesheet" type="text/css" />
     <link href="css/jquery-ui.css" rel="stylesheet" type="text/css"/>
-    <link href="css/tipsy.css" rel="stylesheet" type="text/css" />    
+    <link href="css/tipsy.css" rel="stylesheet" type="text/css" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <table>
-        <td><div id="slider" style="margin-right:10px;width:200px"></div></td>
-        <td width="200"><div id="hourLabel" style="font-size:20pt"></div></td>
-    </table>
-
+    <div id="map"></div>
+    <div id="panel" class="unfolded">
+      <div class="section" id="title">
+        <h1>Swiss Transport Flow</h1>
+        <p>Make.OpenData.ch Submission</p>
+        <a href="#" title="Toggle Panel" id="panel_toggle">hide</a>
+      </div>
+      <div class="section" id="location">
+        <h2>Location</h2>
+        <!-- Use this to locate user position -->
+        <button id="location_btn">Locate</button>
+        <input type="text" id="location_txt" placeholder="Enter your location" / >
+      </div>
+      <div class="section" id="animation">
+        <h2>Time</h2>
+        <!-- Use this to animate over time -->
+        <div class="ui">
+          <div id="slider"></div>
+          <div id="hourLabel"></div>
+        </div>
+    </div>
+    <!-- Fixme -->
     <input type="checkbox" id="showStationsChk" checked>
     <label for="showStationsChk">Show stations</label>
 
@@ -62,9 +46,19 @@
 	<label for="mapTypeOSM">OpenStreetMap</label>
 	<input type="radio" name="mapType" id="mapTypeBM" value="bluemarble" />
 	<label for="mapTypeBM">Blue Marble</label>
-
-    <div id="map"></div>
-	
+    <!-- Fixme -->
+      <div class="section last" id="focus">
+        <h2>Fokus</h2>
+        <!-- Use this to switch between views -->
+        <ul>
+          <li><a href="#" title="">Nodes</a></li>
+          <li><a href="#" title="">Edges</a></li>
+          <li><a href="#" title="">Speed</a></li>
+          <li><a href="#" title="">Capacity</a></li>
+        </ul>
+      </div>
+    </div>
+    
     <script type="text/javascript" src="lib/jquery-1.6.2.min.js"></script>   
     <script type="text/javascript" src="lib/jquery.tipsy.js"></script>
     <script type="text/javascript" src="lib/jquery-ui.min.js"></script>
@@ -76,6 +70,7 @@
     <script type="text/javascript" src="js/fit-projection.js"></script>
     <script type="text/javascript" src="js/load-data.js"></script>
     <script type="text/javascript" src="js/railways.js"></script>
-
+    <script type="text/javascript" src="js/ui.js"></script>
+    
   </body>
 </html>

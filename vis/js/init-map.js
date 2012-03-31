@@ -1,4 +1,4 @@
-var width = 900, height = 600;
+var width = window.innerWidth, height = window.innerHeight;
 var vis = d3.select("#map").append("svg:svg").attr('width', width).attr('height', height);
 
 var po = org.polymaps;
@@ -9,8 +9,8 @@ $(document).bind('stf-ready', function(){
     
     // Create the map object, add it to #map…
     var map = po.map().container(vis.node()).zoom(8).center({
-        lat: 46.801111,
-        lon: 8.226667
+        lat: 46.5,
+        lon: 9
     }).add(po.interact());
     
     // Add the CloudMade image tiles as a base layer…
@@ -41,7 +41,7 @@ $(document).bind('stf-ready', function(){
 			newMapTiles = po.image()    
 			.url(po.url("http://{S}tile.cloudmade.com"
 		     + "/1a1b06b230af4efdbb989ea99e9841af" // http://cloudmade.com/register
-		     + "/45763/256/{Z}/{X}/{Y}.png")
+		     + "/58465/256/{Z}/{X}/{Y}.png")
 		     .hosts(["a.", "b.", "c.", ""]));
 			 map.zoomRange([1, 18]);
 		}
