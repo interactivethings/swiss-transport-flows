@@ -43,10 +43,12 @@ $(document).bind('stf-ready', function(){
 		     + "/1a1b06b230af4efdbb989ea99e9841af" // http://cloudmade.com/register
 		     + "/45763/256/{Z}/{X}/{Y}.png")
 		     .hosts(["a.", "b.", "c.", ""]));
+			 map.zoomRange([1, 18]);
 		}
 		else {
 			newMapTiles = po.image()    
 			.url("http://s3.amazonaws.com/com.modestmaps.bluemarble/{Z}-r{Y}-c{X}.jpg");
+			map.zoomRange([0, 9]);
 		}
 		map.add(newMapTiles);
 		if(mapTiles) {
