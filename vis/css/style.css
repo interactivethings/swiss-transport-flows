@@ -28,7 +28,7 @@ div#map {
 }
 
 #map circle {
-  stroke:red;
+  fill:red;
   opacity: 1;
 }
 

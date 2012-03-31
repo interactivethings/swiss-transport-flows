@@ -2,6 +2,24 @@ var setNewProjectionSize;
 
 (function() {
 
+    var ColorBrewer = {
+        sequential: {
+          OrRd: ['rgb(255, 247, 236)', 'rgb(254, 232, 200)', 'rgb(253, 212, 158)', 'rgb(253, 187, 132)', 'rgb(252, 141, 89)', 'rgb(239, 101, 72)', 'rgb(215, 48, 31)', 'rgb(179, 0, 0)', 'rgb(127, 0, 0)']
+        },
+        diverging : {
+          RdBu4: ["#CA0020", "#F4A582", "#92C5DE", "#0571B0"] 
+        }
+      };
+
+    function domainForColors(colors, min, max) {
+        var d, domain, i, _ref;
+        domain = [min];
+        d = (max - min) / (colors.length - 1);
+        for (i = 1, _ref = colors.length - 1; 1 <= _ref ? i <= _ref : i >= _ref; 1 <= _ref ? i++ : i--) {
+          domain.push(min + d * i);
+        }
+        return domain;
+    }
 
     function bbox(data) {
       var left = Infinity,
@@ -45,11 +63,20 @@ var setNewProjectionSize;
 		}
 		setNewProjectionSize(width, height);
 
-
+      
       var speedColorScale = d3.scale.linear()
         .domain([0, d3.max(d3.values(data.speeds))])
-        .range(["blue", "red"]);
-
+       //  .range(["blue", "red"]);
+        .range(["#0571B0", "#CA0020"]);
+      
+      /*
+      var speedColorScale = 
+        d3.scale.log().domain(
+          domainForColors(
+            ColorBrewer.diverging.RdBu4, 1, 
+             d3.max(d3.values(data.speeds)))).range(
+          ColorBrewer.diverging.RdBu4);
+      */
 
 
       $("#slider")
