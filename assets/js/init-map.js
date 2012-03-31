@@ -37,7 +37,7 @@ $(document).bind('stf-ready', function(){
 	
 	$('input[name="mapType"]').change(function() {
 		var newMapTiles, val = $('input[name="mapType"]:checked').val();
-		if(val == 'osm') {
+		if(val == 'osm' || 1) {
 			newMapTiles = po.image()    
 			.url(po.url("http://{S}tile.cloudmade.com"
 		     + "/1a1b06b230af4efdbb989ea99e9841af" // http://cloudmade.com/register
