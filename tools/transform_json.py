@@ -140,10 +140,22 @@ def generate_train_speeds(data, distances):
     out = open('avg_speeds_per_edge.json', 'wb')
     json.dump(avg_speeds_per_segment, out)
 
+
+def load_station_mapping():
+    station_names = {}
+    data = json.load(open('../../vehicle-simulator/static/geojson/stations-sbb.json'))
+    for feature in data['features']:
+        props = feature['properties']
+        station_names[props['station_id']] = props['name'].encode('utf-8')
+    return station_names
+
+
+
 # station-nr, 0, 1, 2, 3, 4
 def generate_station_freq_csv(data):
     writer = csv.writer(open('station_freq.csv', 'wb'))
     stations = {}
+    station_names = load_station_mapping()
     for item in data:
         arrivals = item['arrs']
         departures = item['deps']
@@ -164,7 +176,7 @@ def generate_station_freq_csv(data):
         for hour, ids in arr_dep.get('dep', {}).iteritems():
             stations_compressed.setdefault(station, {}).setdefault('dep', {})[hour] = len(ids)
     for station, arr_dep in stations_compressed.iteritems():
-        record = [station]
+        record = [station, station_names.get(station, 'Unknown')]
         for h in range(24):
             record.append(arr_dep.get('arr', {}).get(h, 0))
         for h in range(24):
