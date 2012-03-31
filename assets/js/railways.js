@@ -41,12 +41,12 @@ var setNewProjectionSize;
     }
 
     d3.loadData()
-      .json('segments', 'data/edges-sbb.json')
-      .json('stations', 'data/stations-sbb.json')
-      .json('boundary', '../data/switzerland_boundaries.json')
-      .json('trains',  '../data/edge_hours_compressed.json')
-      .json('stationTrainsByHour',  '../data/station_hours_compressed.json')
-      .json('speeds',  '../data/avg_speeds_per_edge.json')
+      .json('segments', 'assets/data/edges-sbb.json')
+      .json('stations', 'assets/data/stations-sbb.json')
+      .json('boundary', 'data/switzerland_boundaries.json')
+      .json('trains',  'data/edge_hours_compressed.json')
+      .json('stationTrainsByHour',  'data/station_hours_compressed.json')
+      .json('speeds',  'data/avg_speeds_per_edge.json')
       .onload(function(data) {
 
 
