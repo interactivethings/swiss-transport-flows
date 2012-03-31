@@ -78,7 +78,7 @@ var setNewProjectionSize;
           ColorBrewer.diverging.RdBu4);
       */
 
-      $("#slider")
+      $("#time_slider")
         .slider({
           orientation: 'horizontal',
           min: 0,
@@ -90,7 +90,7 @@ var setNewProjectionSize;
           }
         });
 
-        $("#slider").slider.prototype.nextStep = function() {
+        $("#time_slider").slider.prototype.nextStep = function() {
             console.log("called next step");
             if(value < max){
                  this.slider( "option" , "value", value + step);
@@ -100,29 +100,34 @@ var setNewProjectionSize;
         };
 
         var animateSlider = (function(){
-            var s = $("#slider");
-            var p = $("#play");
+            var s = $("#time_slider");
+            var p = $("#time_play_btn");
 
             var running = false;
 
 
             function toggle() {
                 console.log("toggleling" + running);
-                if(running)
+                if(running){
                     stop();
-                else
+                    p.removeClass("running");
+                }else{
                     start();
+                    p.addClass("running");
+                  }
             };
 
             function start() {
                 running = true;
                 p.val("pause");
                 run();
+                p.addClass("running");
             };
 
             function stop() {
                 running = false;
                 p.val("play");
+                p.removeClass("running");
             };
 
             function run() {
@@ -149,7 +154,7 @@ var setNewProjectionSize;
         })();
 
 
-         $("#play").click(  function(e, ui) {
+         $("#time_play_btn").click(  function(e, ui) {
                 animateSlider.toggle();
               });
 
@@ -212,7 +217,7 @@ var setNewProjectionSize;
 
 
       function getSelectedHour() {
-        return +$("#slider").slider("option", "value");
+        return +$("#time_slider").slider("option", "value");
       }
 
       function updateVisibility() {
