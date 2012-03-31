@@ -18,8 +18,9 @@
 		  display:block;
 		}
 		
-		circle {
-		  stroke:red;
+		circle.stations {
+		  fill:red;
+      stroke:none;
       opacity:0.5;
 		}
 		
@@ -40,8 +41,8 @@
 		#map svg {
 		}
     </style>
-    <link href="../css/jquery-ui.css" rel="stylesheet" type="text/css"/>
-    <link href="../css/tipsy.css" rel="stylesheet" type="text/css" />    
+    <link href="css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+    <link href="css/tipsy.css" rel="stylesheet" type="text/css" />    
   </head>
   <body>
     <table>
@@ -49,14 +50,21 @@
         <td width="200"><div id="hourLabel" style="font-size:20pt"></div></td>
     </table>
 
+    <input type="checkbox" id="showStationsChk" checked>
+    <label for="showStationsChk">Show stations</label>
+
+    <input type="checkbox" id="showRailwaysChk" checked>
+    <label for="showRailwaysChk">Show railways</label>
+
+
     <div id="map"></div>
 	
     <script type="text/javascript" src="lib/jquery-1.6.2.min.js"></script>   
     <script type="text/javascript" src="lib/jquery.tipsy.js"></script>
     <script type="text/javascript" src="lib/jquery-ui.min.js"></script>
 	
-  	<script type="text/javascript" src="http://mbostock.github.com/d3/d3.v2.js"></script>
-    <script type="text/javascript" src="http://polymaps.org/polymaps.min.js?2.5.0"></script>
+  	<script type="text/javascript" src="lib/d3.v2.min.js"></script>
+    <script type="text/javascript" src="lib/polymaps.min.js"></script>
     <script type="text/javascript" src="js/init-map.js"></script>
 
     <script type="text/javascript" src="js/fit-projection.js"></script>

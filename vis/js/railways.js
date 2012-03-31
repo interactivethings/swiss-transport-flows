@@ -27,7 +27,7 @@ var setNewProjectionSize;
       .json('stations', 'data/stations-sbb.json')
       .json('boundary', '../data/switzerland_boundaries.json')
       .json('trains',  '../data/edge_hours_compressed.json')
-     // .json('stations',  '../data/station_hours.json')
+      .json('stationTrainsByHour',  '../data/station_hours_compressed.json')
       .onload(function(data) {
         var outerg = vis.append('g').attr('id', 'bboxg');
         var mapProj = d3.geo.mercator();
@@ -44,6 +44,20 @@ var setNewProjectionSize;
 
   
       
+
+      $("#slider")
+        .slider({ 
+          orientation: 'horizontal',
+          min: 0,
+          max: 23,
+          value: 9,
+          step: 1,
+          change: function(e, ui) {
+            update();
+          }
+        });
+
+
       $('g#bboxg').data('bbox', bbox(data));
   		$(document).trigger('stf-ready');
 
@@ -69,39 +83,6 @@ var setNewProjectionSize;
           .attr('fill', 'none')
           ;
 
-
-      outerg.selectAll('circle.stations')
-          .data(data.stations.features)
-        .enter().append('circle')
-          .attr('class', 'stations')
-          .attr('r', 1)
-         // .attr('stroke', 'blue')
-          //.attr('opacity', '.5')
-          //.attr('fill', 'blue')
-          ;
- 
-
-        
-
-
-      $("#slider")
-        .slider({ 
-          orientation: 'horizontal',
-          min: 0,
-          max: 23,
-          value: 9,
-          step: 1,
-          change: function(e, ui) {
-            update();
-          }
-        });
-
-      function update() {
-
-        var hour = +$("#slider").slider("option", "value");
-        var hourText = hour + ':00 - ' + (hour+1) + ':00';
-        $('#hourLabel').html(hourText);
-
         function getTrainCount(edgeid, hour) {
           var hours = data.trains[edgeid];
           if (hours !== undefined  &&  hours[hour] !== undefined) {
@@ -109,6 +90,45 @@ var setNewProjectionSize;
           }
           return 0;
         }
+
+        function getStationTrainCount(stationid, hour) {
+          var hours = data.stationTrainsByHour[stationid];
+          if (hours !== undefined  &&  hours[hour] !== undefined) {
+            return hours[hour];
+          }
+          return 0;
+        }
+
+      outerg.selectAll('circle.stations')
+          .data(data.stations.features)
+        .enter().append('circle')
+          .attr('class', 'stations')
+          /*
+          .sort(function(d) {
+            var station_id = +d.properties.station_id;
+            return getStationTrainCount(station_id, getSelectedHour());
+          }) */;
+
+        
+
+      function getSelectedHour() {
+        return +$("#slider").slider("option", "value");
+      }
+
+      function updateVisibility() {
+        outerg.selectAll('circle.stations')
+          .attr("visibility", $('#showStationsChk').is(':checked') ? 'visible' : 'hidden');
+        outerg.selectAll('path.segments')
+          .attr("visibility", $('#showRailwaysChk').is(':checked') ? 'visible' : 'hidden');
+      }
+      $('#showStationsChk').click(function() { updateVisibility(); });
+      $('#showRailwaysChk').click(function() { updateVisibility(); });
+
+      function update() {
+        var hour = getSelectedHour();
+        var hourText = hour + ':00 - ' + (hour+1) + ':00';
+        $('#hourLabel').html(hourText);
+
 
         outerg.selectAll('path.segments')
           .attr('d', mapProjPath)
@@ -121,8 +141,14 @@ var setNewProjectionSize;
             });
 
       outerg.selectAll('circle.stations')
-          .attr('cx', function(d) { return mapProj(d.geometry.coordinates)[0]; })
-          .attr('cy', function(d) { return mapProj(d.geometry.coordinates)[1]; })
+        .attr('cx', function(d) { return mapProj(d.geometry.coordinates)[0]; })
+        .attr('cy', function(d) { return mapProj(d.geometry.coordinates)[1]; })
+        .transition()
+          .duration(500)
+          .attr('r', function(d, i) {
+            var station_id = +d.properties.station_id;
+            return 0.1 + Math.sqrt(getStationTrainCount(station_id, getSelectedHour()));
+          });
 
 
         outerg.selectAll("path.boundary")
@@ -131,6 +157,15 @@ var setNewProjectionSize;
       }
 
       update();
+
+      $('svg circle.stations').tipsy({ 
+        gravity: 'w', 
+        html: true, 
+        title: function() {
+          var d = this.__data__.properties;
+          return d.name + '<br>' + getStationTrainCount(d.station_id, getSelectedHour()) + ' trains'; 
+        }
+      });
 
     });
 
