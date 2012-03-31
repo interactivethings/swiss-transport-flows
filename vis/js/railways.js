@@ -38,7 +38,7 @@ var setNewProjectionSize;
 
     setNewProjectionSize = function(width, height) {
     	fitProjection(mapProj, data.segments, [[0,0],[width, height]], true);
-			if(update) updateProjection();
+			if(updateProjection) updateProjection();
 		}
 		setNewProjectionSize(width, height);
 
@@ -53,7 +53,7 @@ var setNewProjectionSize;
           value: 9,
           step: 1,
           change: function(e, ui) {
-            update();
+            updateHour();
           }
         });
 
@@ -136,7 +136,7 @@ var setNewProjectionSize;
             .attr("d", mapProjPath);
       }
 
-      function update() {
+      function updateHour() {
         var hour = getSelectedHour();
         var hourText = hour + ':00 - ' + (hour+1) + ':00';
         $('#hourLabel').html(hourText);
@@ -162,7 +162,7 @@ var setNewProjectionSize;
       }
 
       updateProjection();
-      update();
+      updateHour();
 
       $('svg circle.stations').tipsy({ 
         gravity: 'w', 
