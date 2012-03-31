@@ -30,11 +30,13 @@ var setNewProjectionSize;
       .json('stationTrainsByHour',  '../data/station_hours_compressed.json')
       .json('speeds',  '../data/avg_speeds_per_edge.json')
       .onload(function(data) {
+
+
         var outerg = vis.append('g').attr('id', 'bboxg');
         var mapProj = d3.geo.mercator();
         //mapProj.translate([0,0]);
         //mapProj.scale(1);
-
+ 
 
 
     setNewProjectionSize = function(width, height) {
@@ -43,11 +45,12 @@ var setNewProjectionSize;
 		}
 		setNewProjectionSize(width, height);
 
-/*
+
       var speedColorScale = d3.scale.linear()
-        .domain([-1, 0, 1])
-        .range(["red", "white", "green"]);
-  */    
+        .domain([0, d3.max(d3.values(data.speeds))])
+        .range(["blue", "red"]);
+
+
 
       $("#slider")
         .slider({ 
@@ -159,9 +162,9 @@ var setNewProjectionSize;
                 return 0.1 + 
                   (getTrainCount(edgeid, hour) + getTrainCount(-edgeid, hour))/3;
               })
-              .attr('stroke-color', function(d, i) {
+              .attr('stroke', function(d, i) {
                 var edgeid = +d.properties.edge_id;
-                data.speeds[edgeid]
+                return speedColorScale(data.speeds[edgeid]);
               })
               ;
           }
@@ -187,6 +190,17 @@ var setNewProjectionSize;
         title: function() {
           var d = this.__data__.properties;
           return d.name + '<br>' + getStationTrainCount(d.station_id, getSelectedHour()) + ' trains'; 
+        }
+      });
+
+      $('svg path.segments').tipsy({ 
+        gravity: 'w', 
+        html: true, 
+        title: function() {
+          var d = this.__data__.properties;
+          var edgeid = +d.edge_id;
+          return getTrainCount(edgeid, getSelectedHour()) + ' trains<br>' +
+                'Avg speed: ' + data.speeds[edgeid] + ' km/h'; 
         }
       });
 
