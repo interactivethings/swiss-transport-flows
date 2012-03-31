@@ -273,3 +273,8 @@ div#map {
   float: left;
   width: 50%;
 }
+#focus ul li#animation_toggle{
+  width: 100%;
+  clear: both;
+  float: none;
+}
