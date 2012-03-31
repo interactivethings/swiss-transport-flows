@@ -1,6 +1,4 @@
-var setNewProjectionSize, updateArrivals;
-
-(function() {
+var setNewProjectionSize, updateArrivals, arrivalsAnimPlaying;
 
     var ColorBrewer = {
         sequential: {
@@ -229,6 +227,25 @@ var setNewProjectionSize, updateArrivals;
       }
       $('#showStationsChk').click(function() { updateVisibility(); });
       $('#showRailwaysChk').click(function() { updateVisibility(); });
+      $('#showSpeedChk').click(function() { updateHour(); });
+      $('#startArrivalsAnim').click(startArrivalsAnim);
+      $('#stopArrivalsAnim').click(stopArrivalsAnim);
+
+  
+
+        
+      function startArrivalsAnim() {
+        arrivalsAnimPlaying = true;
+        updateArrivals(60 * 10);
+      }
+
+
+      function stopArrivalsAnim() {
+        arrivalsAnimPlaying = false;
+        updateHour();
+      }
+
+
 
       function updateProjection() {
         outerg.selectAll('path.segments')
@@ -250,17 +267,27 @@ var setNewProjectionSize, updateArrivals;
 
         var segmentsGroup = outerg.selectAll('g.segments');
         if (force || segmentsGroup.attr('visibility') != 'hidden') {
+
+          var showSpeed = $('#showSpeedChk').is(':checked');
           outerg.selectAll('path.segments')
             .transition()
               .duration(force ? 0 : 500)
               .attr('stroke-width', function(d, i) {
-                var edgeid = +d.properties.edge_id;
-                return 0.1 +
-                  (getTrainCount(edgeid, hour) + getTrainCount(-edgeid, hour))/3;
+                if (showSpeed) {
+                  var edgeid = +d.properties.edge_id;
+                  return 0.1 +
+                    (getTrainCount(edgeid, hour) + getTrainCount(-edgeid, hour))/3;
+                } else {
+                  return "black";
+                } 
               })
               .attr('stroke', function(d, i) {
-                var edgeid = +d.properties.edge_id;
-                return speedColorScale(data.speeds[edgeid]);
+                if (showSpeed) {
+                  var edgeid = +d.properties.edge_id;
+                  return speedColorScale(data.speeds[edgeid]);
+                } else {
+                  return 1;
+                }
               })
               ;
           }
@@ -303,10 +330,12 @@ var setNewProjectionSize, updateArrivals;
       releaseMap();
 
 
-      /*
+
       d3.json('data/station_arrivals.json', function(arrivalsData) {
 
         updateArrivals = function (minutes) {
+          if (!arrivalsAnimPlaying) return;
+
           $('#hourLabel').html( 
             Math.floor((minutes  / 60) % 24) + ':' +  (minutes % 60)
           );
@@ -331,38 +360,14 @@ var setNewProjectionSize, updateArrivals;
           }
 
         }
-        updateArrivals(60 * 10);
-
 
       });
-*/
+
 
 
     });
 
     function releaseMap() {
       $('#overlay').hide();
-      /*var logoPos = $('#logo').position();
-      $('#logo')
-        .css('top', logoPos.top)
-        .css('right', $(window).width() - logoPos.left - $('#logo').width() / 2)
-        .animate({
-            top: '15px',
-            right: '52px',
-            marginRight: '0',
-            marginTop: '0'
-          }, 1800, function() {
-            $(this).animate({
-              top: '20px',
-              right: '57px'
-            }, 100)
-          // Animation complete.
-      });
-      $('#panel')
-        .animate({
-          top: '266'
-        }, 1800)
-    */
     }
 
-})();
