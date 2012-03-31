@@ -162,7 +162,8 @@ def generate_route_speed_csv(data, distances, station_names):
             travel_speed = int(round(float(distance)/travel_time * 3.6))
             first_station = station_names.get(item['sts'][idx - 1])
             second_station = station_names.get(item['sts'][idx])
-            speed_per_route.append((first_station, second_station, travel_speed, distance, travel_time))
+            if first_station and second_station and (travel_time > 120) and (distance > 10000):
+                speed_per_route.append((first_station, second_station, travel_speed, distance, travel_time))
     writer = csv.writer(open('route_speed.csv', 'wb'))
     writer.writerow(['from_station', 'to_station', 'speed(km/h)', 'distance(m)', 'travel_time(seconds)'])
     for from_station, to_station, speed, distance, travel_time in speed_per_route:
