@@ -41,12 +41,12 @@ div#map {
 #panel {
     position: absolute;
     width: 300px;
-    right: 10px;
-    top: 10px;
+    right: 20px;
+    top: 20px;
     background-color: #fff;
-    -webkit-box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.6);
-    -moz-box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.6);
-    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.6);
+    -webkit-box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.6);
+    -moz-box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.6);
+    box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.6);
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
@@ -85,6 +85,9 @@ div#map {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
+}
+.last{
+  border-bottom: none;
 }
 #title{
   
