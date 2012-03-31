@@ -128,5 +128,20 @@ $(document).bind('stf-ready', function(){
 			map.zoom(14);
 		}
 	});
+	
+	$('#location_btn').click(function(e) {
+		e.preventDefault();
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var x = position.coords.longitude;
+            var y = position.coords.latitude;
+            
+            map.center({
+		        lat: y,
+		        lon: x
+		    });
+			map.zoom(14);
+			$('#location_txt').val(y+','+x);
+        }, function() {});
+	});
 });
 
