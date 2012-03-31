@@ -86,3 +86,24 @@ div#map {
   -moz-border-radius: 3px;
   border-radius: 3px;
 }
+#location{
+  position: relative;
+}
+#location #location_btn{
+  position: absolute;
+  top: 47px;
+  left: 14px;
+}
+#location #location_txt{
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-top: 1px solid #ccc;
+  padding: 7px 6px 6px 72px;
+  width: 200px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
+}
