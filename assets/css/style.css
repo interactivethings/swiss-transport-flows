@@ -23,6 +23,7 @@ label:hover {
 div#map {
   background: #fff;
   border: none;
+  border-bottom: 1px solid #ddd;
   width: 100%;
 }
 
@@ -124,8 +125,10 @@ div#map {
   text-transform: uppercase;
 }
 
-#panel p{
-  font-size: 14px;
+#panel p, 
+#panel ul, 
+#panel ol{
+  font-size: 12px;
   margin: 0 0 1em;
 }
 .section{
@@ -163,6 +166,10 @@ div#map {
 }
 #title a{
   color: #222;
+  text-decoration: none;
+}
+#title a:hover{
+  text-decoration: underline;
 }
 #title #panel_toggle{
   background: url(images/icon_sprite.png) 0 -200px no-repeat;
@@ -260,6 +267,29 @@ div#map {
 #time #time_slider{
   margin: 2px 0 0 26px;
 }
+#time .ui-widget-content { 
+  border: 1px solid #ddd; 
+  background: #fff; 
+}
+#time .ui-slider-handle{
+  outline: none;
+}
+.ui-slider-horizontal {
+  height: .8em;
+}
+#time .ui-slider-handle.ui-state-default{
+  background: url(images/icon_sprite.png) 0 -150px no-repeat;
+  border: none;
+  width: 18px;
+  height: 18px;
+}
+#time .ui-slider-handle.ui-state-hover{
+  background: url(images/icon_sprite.png) -68px -150px no-repeat;
+}
+#time .ui-slider-handle.ui-state-active{
+  background: url(images/icon_sprite.png) -136px -150px no-repeat;
+}
+
 /* FOCUS */
 #focus{
 }
