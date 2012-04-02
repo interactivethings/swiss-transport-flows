@@ -263,23 +263,21 @@ div#map {
   background-position: -68px -100px;
 }
 #time #time_slider{
-  margin: 2px 0 0 26px;
-}
-#time .ui-widget-content { 
-  border: 1px solid #ddd; 
-  background: #fff; 
+  margin: 9px 10px 0 36px;
+  height: 1px;
+  background: #ccc;
+  border: none;
+  border-bottom: 1px solid #fff;
 }
 #time .ui-slider-handle{
   outline: none;
-}
-.ui-slider-horizontal {
-  height: .8em;
+  width: 18px;
+  height: 18px;
+  top: -9px;
 }
 #time .ui-slider-handle.ui-state-default{
   background: url(images/icon_sprite.png) 0 -150px no-repeat;
   border: none;
-  width: 18px;
-  height: 18px;
 }
 #time .ui-slider-handle.ui-state-hover{
   background: url(images/icon_sprite.png) -68px -150px no-repeat;
