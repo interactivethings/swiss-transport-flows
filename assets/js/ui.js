@@ -15,4 +15,12 @@ $(document).ready(function() {
       });
     }
   });
+  $('#focus li').tipsy({
+    gravity: 'n',
+    html: true,
+    title: function() {
+      var d = $(this).find("label").html();
+      return d;
+    }
+  });
 });
