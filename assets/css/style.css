@@ -41,6 +41,7 @@ div#map {
   stroke-linecap:round;
   opacity: 1;
 }
+/* COMPASS */
 .compass .back {
   fill: #ddd;
   fill-opacity: 0.8;
@@ -56,7 +57,6 @@ div#map {
   fill-opacity: .3;
   stroke: #eee;
   stroke-width: 1px;
-  shape-rendering: crispEdges;
 }
 
 .compass .direction {
@@ -155,7 +155,6 @@ div#map {
 */
 /* TITLE */
 #title{
-  
 }
 #title img{
   float: left;
@@ -219,7 +218,7 @@ div#map {
   border: 1px solid #ddd;
   border-top: 1px solid #ccc;
   padding: 7px 6px 6px 30px;
-  width: 200px;
+  width: 242px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
