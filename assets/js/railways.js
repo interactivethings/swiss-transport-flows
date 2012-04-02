@@ -170,7 +170,7 @@ var setNewProjectionSize, updateArrivals, arrivalsAnimPlaying;
       .enter().append("path")
           .attr("class", "boundary")
           .attr("d", mapProjPath)
-          .attr("fill", "rgb(230,230,230)")
+          .attr("fill", "#eee")
           .attr("stroke", "rgb(200,200,200)")
           .attr("stroke-width", "0.5");
 

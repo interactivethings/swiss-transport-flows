@@ -1,4 +1,4 @@
-var width = window.innerWidth, height = window.innerHeight;
+var width = window.innerWidth, height = 600;
 var vis = d3.select("#map").append("svg:svg").attr('width', width).attr('height', height);
 
 var po = org.polymaps;
@@ -9,7 +9,7 @@ $(document).bind('stf-ready', function(){
     
     // Create the map object, add it to #map…
     var map = po.map().container(vis.node()).zoom(8).center({
-        lat: 46.5,
+        lat: 46.8,
         lon: 9
     }).add(po.interact());
     
