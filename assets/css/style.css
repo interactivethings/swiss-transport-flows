@@ -23,7 +23,6 @@ label:hover {
 div#map {
   background: #fff;
   border: none;
-  border-bottom: 1px solid #ddd;
   width: 100%;
 }
 
