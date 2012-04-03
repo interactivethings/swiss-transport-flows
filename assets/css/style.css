@@ -170,7 +170,7 @@ div#map {
   text-decoration: underline;
 }
 #title #panel_toggle{
-  background: url(images/icon_sprite.png) 0 -200px no-repeat;
+  background: url(../img/icon_sprite.png) 0 -200px no-repeat;
   width: 18px;
   height: 18px;
   text-indent: -9999px;
@@ -185,7 +185,7 @@ div#map {
   background-position: -136px -200px;
 }
 .folded #title #panel_toggle{
-  background: url(images/icon_sprite.png) 0 -250px no-repeat;
+  background: url(../img/icon_sprite.png) 0 -250px no-repeat;
 }
 .folded #title #panel_toggle:hover{
   background-position: -68px -250px;
@@ -200,7 +200,7 @@ div#map {
 }
 #location #location_btn{
   position: absolute;
-  background: url(images/icon_sprite.png) 0 0 no-repeat;
+  background: url(../img/icon_sprite.png) 0 0 no-repeat;
   width: 18px;
   height: 18px;
   margin: 17px 0 0 7px;
@@ -239,7 +239,7 @@ div#map {
   height: 18px;
 }
 #time #time_play_btn{
-  background: url(images/icon_sprite.png) 0 -50px no-repeat;
+  background: url(../img/icon_sprite.png) 0 -50px no-repeat;
   display: block;
   float: left;
   width: 18px;
@@ -276,14 +276,14 @@ div#map {
   top: -9px;
 }
 #time .ui-slider-handle.ui-state-default{
-  background: url(images/icon_sprite.png) 0 -150px no-repeat;
+  background: url(../img/icon_sprite.png) 0 -150px no-repeat;
   border: none;
 }
 #time .ui-slider-handle.ui-state-hover{
-  background: url(images/icon_sprite.png) -68px -150px no-repeat;
+  background: url(../img/icon_sprite.png) -68px -150px no-repeat;
 }
 #time .ui-slider-handle.ui-state-active{
-  background: url(images/icon_sprite.png) -136px -150px no-repeat;
+  background: url(../img/icon_sprite.png) -136px -150px no-repeat;
 }
 
 /* FOCUS */

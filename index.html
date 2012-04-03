@@ -9,7 +9,7 @@
   	<meta name="author" content="">
   	<link href="http://polymaps.org/style.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/normalize.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/custom-theme/jquery-ui-1.8.18.custom.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/tipsy.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
   </head>
@@ -52,14 +52,13 @@
             <input type="checkbox" id="showSpeedChk" checked>
             <label for="showSpeedChk">Show train speed</label>
           </li>
-
-          <li id="animation_toggle">
-            <br/>
-            Train arrivals:
-            <a href="#" id="startArrivalsAnim">start</a>
-            <a href="#" id="stopArrivalsAnim">stop</a>
-          </li>
         </ul>
+        <p id="animation_toggle">
+          <br/>
+          Train arrivals:
+          <a href="#" id="startArrivalsAnim">start</a>
+          <a href="#" id="stopArrivalsAnim">stop</a>
+        </p>
       </div>
       <div class="section last" id="legend">
         <h2>Legend</h2>
@@ -69,7 +68,7 @@
 
     <script type="text/javascript" src="assets/lib/jquery-1.6.2.min.js"></script>
     <script type="text/javascript" src="assets/lib/jquery.tipsy.js"></script>
-    <script type="text/javascript" src="assets/lib/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="assets/lib/jquery-ui-1.8.18.custom.min.js"></script>
 
   	<script type="text/javascript" src="assets/lib/d3.v2.min.js"></script>
     <script type="text/javascript" src="assets/lib/polymaps.min.js"></script>
