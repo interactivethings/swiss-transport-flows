@@ -15,12 +15,13 @@ $(document).ready(function() {
       });
     }
   });
-  $('#focus li').tipsy({
+  $('#focus_toggle label').tipsy({
     gravity: 'n',
     html: true,
     title: function() {
-      var d = $(this).find("label").html();
+      var d = "Show "+$(this).html();
       return d;
     }
   });
+  $( "#focus_toggle" ).buttonset();
 });
