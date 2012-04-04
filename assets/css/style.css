@@ -326,6 +326,42 @@ div#map {
 #focus .ui-buttonset label{
   width: 33%;
 }
-#focus .ui-button .ui-button-text {
-  font-size: 12px;
+#focus .ui-buttonset label span.ui-button-text{
+  text-indent: -9999px;
+}
+#focus .ui-buttonset label#showRailwaysLabel span.ui-button-text{
+  background: url(../img/icon_sprite.png) 30px -300px no-repeat;
+}
+#focus .ui-buttonset label#showRailwaysLabel.ui-state-hover span.ui-button-text{
+  background-position: -33px -300px;
+}
+#focus .ui-buttonset label#showRailwaysLabel.ui-state-active span.ui-button-text{
+  background-position: -96px -300px;
+}
+#focus .ui-buttonset label#showRailwaysLabel.ui-state-active.ui-state-hover span.ui-button-text{
+  background-position: -33px -300px;
+}
+#focus .ui-buttonset label#showStationsLabel span.ui-button-text{
+  background: url(../img/icon_sprite.png) 30px -350px no-repeat;
+}
+#focus .ui-buttonset label#showStationsLabel.ui-state-hover span.ui-button-text{
+  background-position: -33px -350px;
+}
+#focus .ui-buttonset label#showStationsLabel.ui-state-active span.ui-button-text{
+  background-position: -96px -350px;
+}
+#focus .ui-buttonset label#showStationsLabel.ui-state-active.ui-state-hover span.ui-button-text{
+  background-position: -33px -350px;
+}
+#focus .ui-buttonset label#showSpeedLabel span.ui-button-text{
+  background: url(../img/icon_sprite.png) 30px -400px no-repeat;
+}
+#focus .ui-buttonset label#showSpeedLabel.ui-state-hover span.ui-button-text{
+  background-position: -33px -400px;
+}
+#focus .ui-buttonset label#showSpeedLabel.ui-state-active span.ui-button-text{
+  background-position: -96px -400px;
+}
+#focus .ui-buttonset label#showSpeedLabel.ui-state-active.ui-state-hover span.ui-button-text{
+  background-position: -33px -400px;
 }
