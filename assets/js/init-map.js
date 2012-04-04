@@ -139,7 +139,7 @@ $(document).bind('stf-ready', function(){
 		        lat: y,
 		        lon: x
 		    });
-			map.zoom(14);
+			map.zoom(12);
 			$('#location_txt').val(y+','+x);
         }, function() {});
 	});

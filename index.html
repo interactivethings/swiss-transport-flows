@@ -4,7 +4,7 @@
     <meta charset="utf-8">
   	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-    <title>Swiss Transport Flows</title>
+    <title>Swiss Trains Flow</title>
   	<meta name="description" content="Submission for the Make.OpenData.ch Camp 2012">
   	<meta name="author" content="">
   	<link href="http://polymaps.org/style.css" rel="stylesheet" type="text/css" />
@@ -21,7 +21,7 @@
     <div id="panel" class="unfolded">
       <div class="section" id="title">
         <a href="http://make.opendata.ch/"><img src="assets/img/make.opendata.ch_logo_s.png"></a>
-        <h1>Swiss Transport Flow</h1>
+        <h1>Swiss Trains Flow</h1>
         <p><a href="http://make.opendata.ch/">Make.OpenData.ch Camp 2012</a></p>
         <a href="#" title="Toggle Panel" id="panel_toggle">hide</a>
       </div>
@@ -32,7 +32,7 @@
         <input type="text" id="location_txt" placeholder="Enter your station" / >
       </div>
       <div class="section" id="time">
-        <h2>Time <span id="hourLabel"></span></h2>
+        <h2>Time <div id="hourLabel"></div></h2>
         <!-- Use this to animate over time -->
         <div class="ui">
           <a href="#" title="Play" id="time_play_btn">Play</a>
@@ -43,30 +43,36 @@
         <h2>Focus</h2>
         <ul>
           <li>
-            <input type="checkbox" id="showStationsChk" checked>
-            <label for="showStationsChk">Show stations</label>
+            <input name="focusRadio" type="radio" id="showRailwaysChk" checked>
+            <label for="showRailwaysChk">Railways</label>
+            <div class="explain">How many passenger trains are going within the selected hour and what is their speed.</div>
           </li>
           <li>
-            <input type="checkbox" id="showRailwaysChk" checked>
-            <label for="showRailwaysChk">Show railways</label>
+            <input name="focusRadio" type="radio" id="showStationsChk">
+            <label for="showStationsChk">Stations</label>
+            <div class="explain">How many passenger trains stop at the stations within the selected hour.</div>
           </li>
+          <!--
           <li>
             <input type="checkbox" id="showSpeedChk" checked>
-            <label for="showSpeedChk">Show train speed</label>
+            <label for="showSpeedChk">Train speed</label>
           </li>
 
           <li>
-            <br/>
-            Train arrivals:
+
+            Train arrivals:     <br/>
             <a href="#" id="startArrivalsAnim">start</a>
             <a href="#" id="stopArrivalsAnim">stop</a>
           </li>
+        -->
         </ul>
         
 
-
-        <!-- <h2>Map type</h2>
-                <ul>
+        <!--
+         <h2>Map type</h2>
+              -->
+         
+                <ul style="display:none">
                   <li>
                     <input type="radio" name="mapType" id="mapTypeOSM" value="osm" checked="checked" />
                     <label for="mapTypeOSM">OpenStreetMap</label>
@@ -79,12 +85,19 @@
                     <input type="radio" name="mapType" id="mapTypeNone" value="none" />
                     <label for="mapTypeNone">None</label>
                   </li>
-                </ul> -->
+                </ul>
+
       </div>
-      <div class="section last" id="legend">
+
+      <div class="section" id="legend">
         <h2>Legend</h2>
         <img src="assets/img/legend.png">
       </div>
+
+      <div class="section last" id="credits">
+        Map tiles &copy; <a href="http://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>
+        </div>
+
     </div>
 
     <script type="text/javascript" src="assets/lib/jquery-1.6.2.min.js"></script>

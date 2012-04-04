@@ -32,13 +32,22 @@ div#map {
 }
 
 #map circle {
-  fill:black;
-  opacity: 1;
+  stroke-width:0.5;
+  cursor:default;
+}
+
+#map circle:hover {
+  fill:rgb(236, 112, 20);
 }
 
 #map path.segments {
   stroke-linecap:round;
   opacity: 1;
+  cursor:default;
+}
+
+#map path.segments:hover {
+  stroke:rgb(236, 112, 20);
 }
 .compass .back {
   fill: #ddd;
@@ -145,6 +154,7 @@ div#map {
 }
 .last{
   border-bottom: none;
+  padding:7px 15px;
 }
 /* ==========================================================================
    SECTIONS
@@ -224,14 +234,16 @@ div#map {
 #time{
   position: relative;
 }
-#time h2 span{
+#time .ui{
+  height: 18px;
+}
+#time h2 { margin-bottom:18px;}
+#hourLabel { 
   float: right;
   text-align: right;
   width: 50%;
-  font-weight: normal;
-}
-#time .ui{
-  height: 18px;
+  font-weight: bold;
+  font-size:20px; display:inline-block;
 }
 #time #time_play_btn{
   background: url(images/icon_sprite.png) 0 -50px no-repeat;
@@ -264,12 +276,24 @@ div#map {
 #focus{
 }
 #focus ul{
-  margin: 0;
+  margin: 0 0 0 5px;
   padding: 0;
   overflow: hidden;
 }
 #focus ul li{
+  padding:3px;
   list-style: none;
   float: left;
-  width: 50%;
+  /*width: 50%;*/
+}
+
+#focus ul li input {
+ margin:0px 3px 0px 0px;
+}
+#focus ul li div.explain{
+  font-size:12px; color:#666; padding:7px 5px 5px 20px;
+}
+
+div#credits {
+ font-size:11px; color:#666; 
 }

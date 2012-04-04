@@ -213,21 +213,26 @@ var setNewProjectionSize, updateArrivals, arrivalsAnimPlaying;
           }) */;
 
 
+      function getSelectedHourText() {
+        var hour = getSelectedHour();
+        return hour + ':00 - ' + (hour+1) + ':00';;
+      }
 
       function getSelectedHour() {
         return +$("#time_slider").slider("option", "value");
       }
 
+      /*
       function updateVisibility() {
         updateHour(true);
         outerg.selectAll('g.stations')
           .attr("visibility", $('#showStationsChk').is(':checked') ? 'visible' : 'hidden');
-        outerg.selectAll('g.segments')
-          .attr("visibility", $('#showRailwaysChk').is(':checked') ? 'visible' : 'hidden');
-      }
-      $('#showStationsChk').click(function() { updateVisibility(); });
-      $('#showRailwaysChk').click(function() { updateVisibility(); });
-      $('#showSpeedChk').click(function() { updateHour(); });
+        //outerg.selectAll('g.segments')
+        //  .attr("visibility", $('#showRailwaysChk').is(':checked') ? 'visible' : 'hidden');
+      }*/
+      $('#showStationsChk').click(function() { updateHour(true); });
+      $('#showRailwaysChk').click(function() { updateHour(true); });
+      //$('#showSpeedChk').click(function() { updateHour(); });
       $('#startArrivalsAnim').click(startArrivalsAnim);
       $('#stopArrivalsAnim').click(stopArrivalsAnim);
 
@@ -259,16 +264,14 @@ var setNewProjectionSize, updateArrivals, arrivalsAnimPlaying;
             .attr("d", mapProjPath);
       }
 
-
       function updateHour(force) {
         var hour = getSelectedHour();
-        var hourText = hour + ':00 - ' + (hour+1) + ':00';
-        $('#hourLabel').html(hourText);
+        $('#hourLabel').html(getSelectedHourText());
 
         var segmentsGroup = outerg.selectAll('g.segments');
         if (force || segmentsGroup.attr('visibility') != 'hidden') {
 
-          var showSpeed = $('#showSpeedChk').is(':checked');
+          var showSpeed = $('#showRailwaysChk').is(':checked');
           outerg.selectAll('path.segments')
             .transition()
               .duration(force ? 0 : 500)
@@ -278,7 +281,7 @@ var setNewProjectionSize, updateArrivals, arrivalsAnimPlaying;
                   return 0.1 +
                     (getTrainCount(edgeid, hour) + getTrainCount(-edgeid, hour))/3;
                 } else {
-                  return "black";
+                  return 1.2;
                 } 
               })
               .attr('stroke', function(d, i) {
@@ -286,7 +289,7 @@ var setNewProjectionSize, updateArrivals, arrivalsAnimPlaying;
                   var edgeid = +d.properties.edge_id;
                   return speedColorScale(data.speeds[edgeid]);
                 } else {
-                  return 1;
+                  return "#666";
                 }
               })
               ;
@@ -294,13 +297,23 @@ var setNewProjectionSize, updateArrivals, arrivalsAnimPlaying;
 
         var stationsGroup = outerg.selectAll('g.stations');
         if (force || stationsGroup.attr('visibility') != 'hidden') {
-          outerg.selectAll('circle.stations')
-            .transition()
-              .duration(force ? 0 : 500)
-              .attr('r', function(d, i) {
-                var station_id = +d.properties.station_id;
-                return 0.1 + Math.sqrt(getStationTrainCount(station_id, getSelectedHour()));
-              });
+          if (showSpeed) {
+            outerg.selectAll('circle.stations')
+              .attr('fill','white')
+              .attr('stroke','black')
+              .attr('r', 2);
+          } else {
+
+            outerg.selectAll('circle.stations')
+              .attr('fill','rgb(26, 152, 80)')
+              .transition()
+                .duration(force ? 0 : 500)
+                .attr('r', function(d, i) {
+                  var station_id = +d.properties.station_id;
+                  return 0.1 + Math.sqrt(getStationTrainCount(station_id, getSelectedHour()));
+                });
+
+          }
         }
       }
 
@@ -310,19 +323,24 @@ var setNewProjectionSize, updateArrivals, arrivalsAnimPlaying;
       $('svg circle.stations').tipsy({
         gravity: 'w',
         html: true,
+        //fade: true,
         title: function() {
           var d = this.__data__.properties;
-          return d.name + '<br>' + getStationTrainCount(d.station_id, getSelectedHour()) + ' trains';
+          return  d.name + '<br>' + 
+            getSelectedHourText()+'<br>'+
+            getStationTrainCount(d.station_id, getSelectedHour()) + ' trains';
         }
       });
 
       $('svg path.segments').tipsy({
-        gravity: 'w',
+        gravity: 'n',
         html: true,
+        //fade: true,
         title: function() {
           var d = this.__data__.properties;
           var edgeid = +d.edge_id;
-          return getTrainCount(edgeid, getSelectedHour()) + ' trains<br>' +
+          return  getTrainCount(edgeid, getSelectedHour()) + ' trains<br>' +
+                getSelectedHourText()+'<br>'+
                 'Avg speed: ' + data.speeds[edgeid] + ' km/h';
         }
       });
@@ -330,7 +348,7 @@ var setNewProjectionSize, updateArrivals, arrivalsAnimPlaying;
       releaseMap();
 
 
-
+      /*
       d3.json('data/station_arrivals.json', function(arrivalsData) {
 
         updateArrivals = function (minutes) {
@@ -362,6 +380,7 @@ var setNewProjectionSize, updateArrivals, arrivalsAnimPlaying;
         }
 
       });
+      */
 
 
 
