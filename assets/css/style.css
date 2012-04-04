@@ -228,12 +228,46 @@ div#map {
 /* TIME */
 #time{
   position: relative;
+  padding: 0;
+  border: none;
+  border-bottom: 1px solid #ddd;
+}
+#time .ui-tabs-panel {
+  padding: 10px 10px 20px;
 }
 #time h2 span{
   float: right;
   text-align: right;
   width: 50%;
   font-weight: normal;
+}
+#time .ui-tabs-nav{
+  border: none;
+  border-bottom: 1px solid #ddd;
+  background: #eee;
+  padding: 0;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+}
+#time .ui-state-default, #time .ui-widget-content .ui-state-default, #time .ui-widget-header .ui-state-default {
+  border: none;
+  background: transparent;
+}
+#time .ui-tabs-nav li {
+  margin: 0;
+}
+#time .ui-tabs-nav li.ui-tabs-selected {
+  background: #fff;
+  border: none;
+  font-weight: bold;
+}
+#time .ui-tabs-nav li.ui-tabs-selected:first-child {
+  border-right: 1px solid #ddd;
+}
+#time .ui-tabs-nav li.ui-tabs-selected:last-child {
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
 }
 #time .ui{
   height: 18px;
@@ -289,18 +323,9 @@ div#map {
 /* FOCUS */
 #focus{
 }
-#focus ul{
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
+#focus .ui-buttonset label{
+  width: 33%;
 }
-#focus ul li{
-  list-style: none;
-  float: left;
-  width: 50%;
-}
-#focus ul li#animation_toggle{
-  width: 100%;
-  clear: both;
-  float: none;
+#focus .ui-button .ui-button-text {
+  font-size: 12px;
 }
