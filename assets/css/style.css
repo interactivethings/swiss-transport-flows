@@ -330,38 +330,38 @@ div#map {
   text-indent: -9999px;
 }
 #focus .ui-buttonset label#showRailwaysLabel span.ui-button-text{
-  background: url(../img/icon_sprite.png) 30px -300px no-repeat;
+  background: url(../img/icon_sprite.png) 30px -295px no-repeat;
 }
 #focus .ui-buttonset label#showRailwaysLabel.ui-state-hover span.ui-button-text{
-  background-position: -33px -300px;
+  background-position: -33px -295px;
 }
 #focus .ui-buttonset label#showRailwaysLabel.ui-state-active span.ui-button-text{
-  background-position: -96px -300px;
+  background-position: -96px -295px;
 }
 #focus .ui-buttonset label#showRailwaysLabel.ui-state-active.ui-state-hover span.ui-button-text{
-  background-position: -33px -300px;
+  background-position: -33px -295px;
 }
 #focus .ui-buttonset label#showStationsLabel span.ui-button-text{
-  background: url(../img/icon_sprite.png) 30px -350px no-repeat;
+  background: url(../img/icon_sprite.png) 30px -345px no-repeat;
 }
 #focus .ui-buttonset label#showStationsLabel.ui-state-hover span.ui-button-text{
-  background-position: -33px -350px;
+  background-position: -33px -345px;
 }
 #focus .ui-buttonset label#showStationsLabel.ui-state-active span.ui-button-text{
-  background-position: -96px -350px;
+  background-position: -96px -345px;
 }
 #focus .ui-buttonset label#showStationsLabel.ui-state-active.ui-state-hover span.ui-button-text{
-  background-position: -33px -350px;
+  background-position: -33px -345px;
 }
 #focus .ui-buttonset label#showSpeedLabel span.ui-button-text{
-  background: url(../img/icon_sprite.png) 30px -400px no-repeat;
+  background: url(../img/icon_sprite.png) 30px -395px no-repeat;
 }
 #focus .ui-buttonset label#showSpeedLabel.ui-state-hover span.ui-button-text{
-  background-position: -33px -400px;
+  background-position: -33px -395px;
 }
 #focus .ui-buttonset label#showSpeedLabel.ui-state-active span.ui-button-text{
-  background-position: -96px -400px;
+  background-position: -96px -395px;
 }
 #focus .ui-buttonset label#showSpeedLabel.ui-state-active.ui-state-hover span.ui-button-text{
-  background-position: -33px -400px;
+  background-position: -33px -395px;
 }
