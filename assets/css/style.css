@@ -297,3 +297,8 @@ div#map {
 div#credits {
  font-size:11px; color:#666; 
 }
+#focus ul li#animation_toggle{
+  width: 100%;
+  clear: both;
+  float: none;
+}
