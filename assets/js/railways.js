@@ -308,7 +308,7 @@ var setNewProjectionSize, updateArrivals, arrivalsAnimPlaying;
       updateHour();
 
       $('svg circle.stations').tipsy({
-        gravity: 'w',
+        gravity: 's',
         html: true,
         title: function() {
           var d = this.__data__.properties;
@@ -317,7 +317,7 @@ var setNewProjectionSize, updateArrivals, arrivalsAnimPlaying;
       });
 
       $('svg path.segments').tipsy({
-        gravity: 'w',
+        gravity: 's',
         html: true,
         title: function() {
           var d = this.__data__.properties;

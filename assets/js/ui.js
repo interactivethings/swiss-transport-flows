@@ -16,12 +16,15 @@ $(document).ready(function() {
     }
   });
   $('#focus_toggle label').tipsy({
-    gravity: 'n',
+    gravity: 's',
     html: true,
     title: function() {
       var d = "Show "+$(this).html();
       return d;
     }
+  });
+  $('#time_play_btn, #location_btn').tipsy({
+    gravity: 's'
   });
   $( "#focus_toggle" ).buttonset();
   $( "#time" ).tabs();
