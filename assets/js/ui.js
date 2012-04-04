@@ -24,4 +24,5 @@ $(document).ready(function() {
     }
   });
   $( "#focus_toggle" ).buttonset();
+  $( "#time" ).tabs();
 });
