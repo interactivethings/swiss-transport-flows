@@ -97,7 +97,10 @@ $(document).bind('stf-ready', function(){
 	
     map.on("move", move);
 	
-  $(window).resize(move);
+  $(window).resize(function() {
+    move();
+    vis.attr('width', window.innerWidth).attr('height', window.innerHeight);
+  });
 
 	move();
     
