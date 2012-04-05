@@ -193,6 +193,13 @@ var setNewProjectionSize, updateArrivals, arrivalsAnimPlaying;
           return 0;
         }
 
+        function trainCountToText(count) {
+          if (count === 0) return 'No trains';
+          if (count === 1) return 'One train';
+          return count + ' trains';
+        }
+
+
         function getStationTrainCount(stationid, hour) {
           var hours = data.stationTrainsByHour[stationid];
           if (hours !== undefined  &&  hours[hour] !== undefined) {
@@ -328,9 +335,9 @@ var setNewProjectionSize, updateArrivals, arrivalsAnimPlaying;
         //fade: true,
         title: function() {
           var d = this.__data__.properties;
-          return  d.name + '<br>' + 
-            getSelectedHourText()+'<br>'+
-            getStationTrainCount(d.station_id, getSelectedHour()) + ' trains';
+          return  '<b>'+d.name + '</b><br>' + 
+            trainCountToText(getStationTrainCount(d.station_id, getSelectedHour())) +
+            ' stop here<br> between ' + getSelectedHourText().replace('-',' and ');
         }
       });
 
@@ -343,9 +350,10 @@ var setNewProjectionSize, updateArrivals, arrivalsAnimPlaying;
         title: function() {
           var d = this.__data__.properties;
           var edgeid = +d.edge_id;
-          return  getTrainCount(edgeid, getSelectedHour()) + ' trains<br>' +
-                getSelectedHourText()+'<br>'+
-                'Avg speed: ' + data.speeds[edgeid] + ' km/h';
+          return  trainCountToText(getTrainCount(edgeid, getSelectedHour())) + ' pass here<br> ' +
+                ' at avg speed of ' + data.speeds[edgeid] + ' km/h' +'<br>'+
+                ' between ' +getSelectedHourText().replace('-',' and ')
+                ;
         }
       });
 
