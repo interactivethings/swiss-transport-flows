@@ -350,8 +350,8 @@ var setNewProjectionSize, updateArrivals, arrivalsAnimPlaying;
         title: function() {
           var d = this.__data__.properties;
           var edgeid = +d.edge_id;
-          return  trainCountToText(getTrainCount(edgeid, getSelectedHour())) + ' pass here<br> ' +
-                ' at avg speed of ' + data.speeds[edgeid] + ' km/h' +'<br>'+
+          return  '<b>'+trainCountToText(getTrainCount(edgeid, getSelectedHour())) + '</b> pass here<br> ' +
+                ' at avg speed of <b>' + data.speeds[edgeid] + ' km/h</b>' +'<br>'+
                 ' between ' +getSelectedHourText().replace('-',' and ')
                 ;
         }
