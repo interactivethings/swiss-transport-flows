@@ -67,26 +67,6 @@
         -->
         </ul>
         
-
-        <!--
-         <h2>Map type</h2>
-              -->
-         
-                <ul style="display:none">
-                  <li>
-                    <input type="radio" name="mapType" id="mapTypeOSM" value="osm" checked="checked" />
-                    <label for="mapTypeOSM">OpenStreetMap</label>
-                  </li>
-                  <li>
-                    <input type="radio" name="mapType" id="mapTypeBM" value="bluemardble" />
-                    <label for="mapTypeBM">Blue Marble</label>
-                  </li>
-                  <li>
-                    <input type="radio" name="mapType" id="mapTypeNone" value="none" />
-                    <label for="mapTypeNone">None</label>
-                  </li>
-                </ul>
-
       </div>
 
       <div class="section" id="legend">
@@ -94,9 +74,33 @@
         <img src="assets/img/legend.png">
       </div>
 
-      <div class="section last" id="credits">
+      <div class="section" id="mapTypes">
+         <h2>Map</h2>
+         
+                <ul>
+                  <li>
+                    <input type="radio" name="mapType" id="mapTypeOSM" value="osm" checked="checked" />
+                    <label for="mapTypeOSM">Street map</label>
+                  </li>
+                  <!--
+                  <li>
+                    <input type="radio" name="mapType" id="mapTypeBM" value="bluemarble" />
+                    <label for="mapTypeBM">Satellite</label>
+                  </li>
+                  -->
+                  <li>
+                    <input type="radio" name="mapType" id="mapTypeNone" value="none" />
+                    <label for="mapTypeNone">None</label>
+                  </li>
+                </ul>
+      </div>
+
+      <div class="section">
+        <div id="credits">
         Map tiles &copy; <a href="http://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>
         </div>
+      </div>
+
 
     </div>
 

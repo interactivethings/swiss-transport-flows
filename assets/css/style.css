@@ -305,3 +305,19 @@ div#credits {
 
 
 .tipsy { font-size:11pt; }
+
+
+#mapTypes { padding-bottom:10px;}
+#mapTypes h2 {  float:left; margin-top:0.2em;}
+#mapTypes label { font-size:9pt; }
+#mapTypes ul {   
+  padding: 0 0 0 25px;
+  margin:0;
+  overflow: hidden;
+}
+#mapTypes li {
+  list-style: none;
+  margin-right:5px;
+  display:inline;
+}
+
