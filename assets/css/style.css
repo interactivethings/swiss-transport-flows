@@ -237,7 +237,7 @@ div#map {
 #time .ui{
   height: 18px;
 }
-#time h2 { margin-bottom:18px;}
+#time h2 { padding-bottom:5px;}
 #hourLabel { 
   float: right;
   text-align: right;
