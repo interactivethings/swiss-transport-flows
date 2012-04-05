@@ -323,6 +323,8 @@ var setNewProjectionSize, updateArrivals, arrivalsAnimPlaying;
       $('svg circle.stations').tipsy({
         gravity: 'w',
         html: true,
+        delayIn: 300,
+        delayOut: 100,
         //fade: true,
         title: function() {
           var d = this.__data__.properties;
@@ -336,6 +338,8 @@ var setNewProjectionSize, updateArrivals, arrivalsAnimPlaying;
         gravity: 'n',
         html: true,
         //fade: true,
+        delayIn: 300,
+        delayOut: 100,
         title: function() {
           var d = this.__data__.properties;
           var edgeid = +d.edge_id;
