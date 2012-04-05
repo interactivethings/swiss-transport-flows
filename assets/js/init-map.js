@@ -97,6 +97,8 @@ $(document).bind('stf-ready', function(){
 	
     map.on("move", move);
 	
+  $(window).resize(move);
+
 	move();
     
     function transform(d){
