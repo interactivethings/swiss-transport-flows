@@ -8,10 +8,12 @@ $(document).bind('stf-ready', function(){
     var curZoomLevel;
     
     // Create the map object, add it to #map…
-    var map = po.map().container(vis.node()).zoom(8).center({
-        lat: 46.5,
-        lon: 9
-    }).add(po.interact());
+    var map = po.map().container(vis.node())
+      .zoom(8.5)
+      .center({
+          lat: 46.7,
+          lon: 9
+      }).add(po.interact());
     
     // Add the CloudMade image tiles as a base layer…
 	var mapTiles;
