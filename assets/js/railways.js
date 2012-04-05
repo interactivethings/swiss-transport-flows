@@ -275,15 +275,17 @@ var setNewProjectionSize, updateArrivals, arrivalsAnimPlaying;
         var hour = getSelectedHour();
         $('#hourLabel').html(getSelectedHourText());
 
-        var segmentsGroup = outerg.selectAll('g.segments');
-        if (force || segmentsGroup.attr('visibility') != 'hidden') {
+        var showRailways = $('#showRailwaysChk').is(':checked');
+        var showStations = $('#showStationsChk').is(':checked');
 
-          var showSpeed = $('#showRailwaysChk').is(':checked');
+        var segmentsGroup = outerg.selectAll('g.segments');
+        if (force || showRailways) {
+
           outerg.selectAll('path.segments')
             .transition()
               .duration(force ? 0 : 500)
               .attr('stroke-width', function(d, i) {
-                if (showSpeed) {
+                if (showRailways) {
                   var edgeid = +d.properties.edge_id;
                   return 0.1 +
                     (getTrainCount(edgeid, hour) + getTrainCount(-edgeid, hour))/3;
@@ -292,7 +294,7 @@ var setNewProjectionSize, updateArrivals, arrivalsAnimPlaying;
                 } 
               })
               .attr('stroke', function(d, i) {
-                if (showSpeed) {
+                if (showRailways) {
                   var edgeid = +d.properties.edge_id;
                   return speedColorScale(data.speeds[edgeid]);
                 } else {
@@ -303,14 +305,15 @@ var setNewProjectionSize, updateArrivals, arrivalsAnimPlaying;
           }
 
         var stationsGroup = outerg.selectAll('g.stations');
-        if (force || stationsGroup.attr('visibility') != 'hidden') {
-          if (showSpeed) {
+        if (!showStations) {
             outerg.selectAll('circle.stations')
               .attr('fill','white')
               .attr('stroke','black')
               .attr('r', 2);
-          } else {
+        }
 
+        if (force || showStations) {
+          if (!showRailways) {
             outerg.selectAll('circle.stations')
               .attr('fill','rgb(26, 152, 80)')
               .transition()
@@ -325,7 +328,7 @@ var setNewProjectionSize, updateArrivals, arrivalsAnimPlaying;
       }
 
       updateProjection();
-      updateHour();
+      updateHour(true);
 
       $('svg circle.stations').tipsy({
         gravity: 'w',
