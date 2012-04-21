@@ -15,4 +15,7 @@ $(document).ready(function() {
       });
     }
   });
+  $('#time_play_btn, #location_btn').tipsy({
+    gravity: 's'
+  });
 });
