@@ -41,17 +41,12 @@ d3.loadData()
 
   var outerg = vis.append('g').attr('id', 'bboxg');
   var mapProj = d3.geo.mercator();
-  //mapProj.translate([0,0]);
-  //mapProj.scale(1);
-
-
 
   setNewProjectionSize = function(width, height) {
     fitProjection(mapProj, data.segments, [[0,0],[width, height]], true);
     if(updateProjection) updateProjection();
   }
   setNewProjectionSize(width, height);
-
 
   var speedColorScale = d3.scale.linear()
   .domain([0, d3.max(d3.values(data.speeds))])
@@ -134,115 +129,87 @@ d3.loadData()
     return {
       toggle: toggle
     };
-    })();
+  })();
 
 
-    $("#time_play_btn").click(  function(e, ui) {
-      animateSlider.toggle();
-    });
+  $("#time_play_btn").click(  function(e, ui) {
+    animateSlider.toggle();
+  });
 
+  $('g#bboxg').data('bbox', bbox(data));
+  $(document).trigger('stf-ready');
 
+  var mapProjPath = d3.geo.path().projection(mapProj);
 
+  outerg.selectAll("path")
+  .data(data.boundary.features)
+  .enter().append("path")
+  .attr("class", "boundary")
+  .attr("d", mapProjPath)
+  .attr("fill", "rgb(230,230,230)")
+  .attr("stroke", "rgb(200,200,200)")
+  .attr("stroke-width", "0.5");
 
-    $('g#bboxg').data('bbox', bbox(data));
-    $(document).trigger('stf-ready');
+  var segmentsGroup = outerg.append("g").attr('class','segments');
+  
+  segmentsGroup.selectAll('path.segments')
+  .data(data.segments.features)
+  .enter().append('path')
+  .attr('class', 'segments')
+  .attr('stroke', 'black')
+  .attr('fill', 'none');
 
-    var mapProjPath = d3.geo.path().projection(mapProj);
-
-
-    outerg.selectAll("path")
-    .data(data.boundary.features)
-    .enter().append("path")
-    .attr("class", "boundary")
-    .attr("d", mapProjPath)
-    .attr("fill", "rgb(230,230,230)")
-    .attr("stroke", "rgb(200,200,200)")
-    .attr("stroke-width", "0.5");
-
-
-    var segmentsGroup = outerg.append("g").attr('class','segments');;
-    segmentsGroup.selectAll('path.segments')
-    .data(data.segments.features)
-    .enter().append('path')
-    .attr('class', 'segments')
-    .attr('stroke', 'black')
-    //.attr('stroke-opacity', '.5')
-    .attr('fill', 'none')
-    ;
-
-    function getTrainCount(edgeid, hour) {
-      var hours = data.trains[edgeid];
-      if (hours !== undefined  &&  hours[hour] !== undefined) {
-        return hours[hour];
-      }
-      return 0;
+  function getTrainCount(edgeid, hour) {
+    var hours = data.trains[edgeid];
+    if (hours !== undefined  &&  hours[hour] !== undefined) {
+      return hours[hour];
     }
+    return 0;
+  }
 
-    function trainCountToText(count) {
-      if (count === 0) return 'No trains';
-      if (count === 1) return 'One train';
-      return count + ' trains';
+  function trainCountToText(count) {
+    if (count === 0) return 'No trains';
+    if (count === 1) return 'One train';
+    return count + ' trains';
+  }
+
+  function getStationTrainCount(stationid, hour) {
+    var hours = data.stationTrainsByHour[stationid];
+    if (hours !== undefined  &&  hours[hour] !== undefined) {
+      return hours[hour];
     }
+    return 0;
+  }
 
+  var stationsGroup = outerg.append("g").attr('class','stations');
+  stationsGroup.selectAll('circle.stations')
+  .data(data.stations.features)
+  .enter().append('circle')
+  .attr('class', 'stations');
 
-    function getStationTrainCount(stationid, hour) {
-      var hours = data.stationTrainsByHour[stationid];
-      if (hours !== undefined  &&  hours[hour] !== undefined) {
-        return hours[hour];
-      }
-      return 0;
-    }
+  function getSelectedHourText() {
+    var hour = getSelectedHour();
+    return hour + ':00 - ' + (hour+1) + ':00';;
+  }
 
-    var stationsGroup = outerg.append("g").attr('class','stations');
-    stationsGroup.selectAll('circle.stations')
-    .data(data.stations.features)
-    .enter().append('circle')
-    .attr('class', 'stations')
-    /*
-    .sort(function(d) {
-      var station_id = +d.properties.station_id;
-      return getStationTrainCount(station_id, getSelectedHour());
-      }) */;
+  function getSelectedHour() {
+    return +$("#time_slider").slider("option", "value");
+  }
 
-
-      function getSelectedHourText() {
-        var hour = getSelectedHour();
-        return hour + ':00 - ' + (hour+1) + ':00';;
-      }
-
-      function getSelectedHour() {
-        return +$("#time_slider").slider("option", "value");
-      }
-
-      /*
-      function updateVisibility() {
-        updateHour(true);
-        outerg.selectAll('g.stations')
-        .attr("visibility", $('#showStationsChk').is(':checked') ? 'visible' : 'hidden');
-        //outerg.selectAll('g.segments')
-        //  .attr("visibility", $('#showRailwaysChk').is(':checked') ? 'visible' : 'hidden');
-        }*/
   $('#showStationsChk').click(function() { updateHour(true); });
   $('#showRailwaysChk').click(function() { updateHour(true); });
-  //$('#showSpeedChk').click(function() { updateHour(); });
   $('#startArrivalsAnim').click(startArrivalsAnim);
   $('#stopArrivalsAnim').click(stopArrivalsAnim);
-
-
-
 
   function startArrivalsAnim() {
     arrivalsAnimPlaying = true;
     updateArrivals(60 * 10);
   }
 
-
   function stopArrivalsAnim() {
     arrivalsAnimPlaying = false;
     updateHour();
   }
-
-
 
   function updateProjection() {
     outerg.selectAll('path.segments')
@@ -285,10 +252,9 @@ d3.loadData()
         } else {
           return "#666";
         }
-      })
-      ;
+      });
     }
-
+    
     var stationsGroup = outerg.selectAll('g.stations');
     if (!showStations) {
       outerg.selectAll('circle.stations')
@@ -307,7 +273,6 @@ d3.loadData()
           var station_id = +d.properties.station_id;
           return 0.1 + Math.sqrt(getStationTrainCount(station_id, getSelectedHour()));
         });
-
       }
     }
   }
@@ -320,7 +285,6 @@ d3.loadData()
     html: true,
     delayIn: 300,
     delayOut: 100,
-    //fade: true,
     title: function() {
       var d = this.__data__.properties;
       return  '<b>'+d.name + '</b><br>' + 
@@ -332,7 +296,6 @@ d3.loadData()
   $('svg path.segments').tipsy({
     gravity: 's',
     html: true,
-    //fade: true,
     delayIn: 300,
     delayOut: 100,
     title: function() {
@@ -347,7 +310,6 @@ d3.loadData()
   });
 
   releaseMap();
-
 
   /*
   d3.json('data/station_arrivals.json', function(arrivalsData) {
@@ -382,8 +344,6 @@ d3.loadData()
 
   });
   */
-
-
 
 });
 function releaseMap() {
