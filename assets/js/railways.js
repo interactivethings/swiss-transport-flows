@@ -1,4 +1,6 @@
 var setNewProjectionSize, updateArrivals, arrivalsAnimPlaying;
+var blue = "#0571B0";
+var red = "#CA0020";
 
 function domainForColors(colors, min, max) {
   var d, domain, i, _ref;
@@ -50,7 +52,7 @@ d3.loadData()
 
   var speedColorScale = d3.scale.linear()
   .domain([0, d3.max(d3.values(data.speeds))])
-  .range(["#0571B0", "#CA0020"]);
+  .range([blue, red]);
 
   $("#time_slider")
   .slider({
@@ -266,7 +268,7 @@ d3.loadData()
     if (force || showStations) {
       if (!showRailways) {
         outerg.selectAll('circle.stations')
-        .attr('fill','rgb(26, 152, 80)')
+        .attr('fill',red)
         .transition()
         .duration(force ? 0 : 500)
         .attr('r', function(d, i) {
