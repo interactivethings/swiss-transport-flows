@@ -40,7 +40,6 @@ d3.loadData()
 .json('speeds',  'data/avg_speeds_per_edge.json')
 .onload(function(data) {
 
-
   var outerg = vis.append('g').attr('id', 'bboxg');
   var mapProj = d3.geo.mercator();
 
