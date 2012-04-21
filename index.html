@@ -9,14 +9,12 @@
   	<meta name="author" content="">
   	<link href="http://polymaps.org/style.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/normalize.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/custom-theme/jquery-ui-1.8.18.custom.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/tipsy.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
     <div id="overlay"></div>
-    <!-- <img id="logo" src="assets/img/make.opendata.ch_logo.png" /> -->
-
     <div id="map"></div>
     <div id="panel" class="unfolded">
       <div class="section" id="title">
@@ -28,14 +26,14 @@
       <div class="section" id="location">
         <h2>Location</h2>
         <!-- Use this to locate user position -->
-        <a href="#" title="" id="location_btn">Locate</a>
+        <a href="#" title="Find nearest station" id="location_btn">Locate</a>
         <input type="text" id="location_txt" placeholder="Enter your station" / >
       </div>
       <div class="section" id="time">
         <h2>Time <div id="hourLabel"></div></h2>
         <!-- Use this to animate over time -->
         <div class="ui">
-          <a href="#" title="Play" id="time_play_btn">Play</a>
+          <a href="#" title="Play animation" id="time_play_btn">Play</a>
           <div id="time_slider"></div>
         </div>
       </div>
@@ -95,10 +93,8 @@
                 </ul>
       </div>
 
-      <div class="section">
-        <div id="credits">
-        Map tiles &copy; <a href="http://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>
-        </div>
+      <div class="section last" id="credits">
+        <p>Map tiles &copy; <a href="http://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a></p>
       </div>
 
 
