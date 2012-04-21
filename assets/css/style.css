@@ -97,7 +97,7 @@ div#map {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.5);
+    background: #fff url(../img/ajax_loader.gif) 50% 50% no-repeat;
     z-index: 100;
 }
 /* ==========================================================================
@@ -154,7 +154,6 @@ div#map {
 }
 .last{
   border-bottom: none;
-  padding:7px 15px;
 }
 /* ==========================================================================
    SECTIONS
@@ -173,9 +172,13 @@ div#map {
 }
 #title a{
   color: #222;
+  text-decoration: none;
+}
+#title a:hover{
+  text-decoration: underline;
 }
 #title #panel_toggle{
-  background: url(images/icon_sprite.png) 0 -200px no-repeat;
+  background: url(../img/icon_sprite.png) 0 -200px no-repeat;
   width: 18px;
   height: 18px;
   text-indent: -9999px;
@@ -190,7 +193,7 @@ div#map {
   background-position: -136px -200px;
 }
 .folded #title #panel_toggle{
-  background: url(images/icon_sprite.png) 0 -250px no-repeat;
+  background: url(../img/icon_sprite.png) 0 -250px no-repeat;
 }
 .folded #title #panel_toggle:hover{
   background-position: -68px -250px;
@@ -205,7 +208,7 @@ div#map {
 }
 #location #location_btn{
   position: absolute;
-  background: url(images/icon_sprite.png) 0 0 no-repeat;
+  background: url(../img/icon_sprite.png) 0 0 no-repeat;
   width: 18px;
   height: 18px;
   margin: 17px 0 0 7px;
@@ -246,7 +249,7 @@ div#map {
   font-size:20px; display:inline-block;
 }
 #time #time_play_btn{
-  background: url(images/icon_sprite.png) 0 -50px no-repeat;
+  background: url(../img/icon_sprite.png) 0 -50px no-repeat;
   display: block;
   float: left;
   width: 18px;
@@ -293,31 +296,44 @@ div#map {
 #focus ul li div.explain{
   font-size:12px; color:#666; padding:7px 5px 5px 20px;
 }
-
-div#credits {
- font-size:11px; color:#666; 
-}
 #focus ul li#animation_toggle{
   width: 100%;
   clear: both;
   float: none;
 }
 
-
-.tipsy { font-size:11pt; }
-
-
-#mapTypes { padding-bottom:10px;}
-#mapTypes h2 {  float:left; margin-top:0.2em;}
-#mapTypes label { font-size:9pt; }
-#mapTypes ul {   
+/* MAP TYPES */
+#mapTypes { 
+  padding-bottom: 10px;
+}
+#mapTypes h2 { 
+  float:left; 
+}
+#mapTypes label { 
+  font-size:12px;
+}
+#mapTypes ul {
+  line-height: 1;
   padding: 0 0 0 25px;
-  margin:0;
+  margin: 10px 0;
   overflow: hidden;
 }
 #mapTypes li {
   list-style: none;
-  margin-right:5px;
-  display:inline;
+  margin-right: 20px;
+  display: inline;
 }
 
+/* CREDITS */
+#credits{
+  padding-bottom: 10px;
+}
+#credits p {
+  color:#666;
+  font-size: 11px; 
+  margin: 10px 0;
+}
+
+/* TOOLTIP */
+.tipsy { 
+  font-size:11pt; }
