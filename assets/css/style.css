@@ -240,13 +240,14 @@ div#map {
 #time .ui{
   height: 18px;
 }
-#time h2 { padding-bottom:5px;}
+#time h2 { 
+  padding-bottom:5px;
+}
 #hourLabel { 
   float: right;
   text-align: right;
   width: 50%;
-  font-weight: bold;
-  font-size:20px; display:inline-block;
+  display:inline-block;
 }
 #time #time_play_btn{
   background: url(../img/icon_sprite.png) 0 -50px no-repeat;
