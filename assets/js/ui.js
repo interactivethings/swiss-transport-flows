@@ -23,7 +23,7 @@ $(document).ready(function() {
       return d;
     }
   });
-  $('#time_play_btn, #location_btn').tipsy({
+  $('.time_play_btn, #location_btn').tipsy({
     gravity: 's'
   });
   $( "#focus_toggle" ).buttonset();
