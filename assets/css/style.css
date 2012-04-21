@@ -225,7 +225,7 @@ div#map {
   border: 1px solid #ddd;
   border-top: 1px solid #ccc;
   padding: 7px 6px 6px 30px;
-  width: 200px;
+  width: 242px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
@@ -280,22 +280,26 @@ div#map {
 #focus{
 }
 #focus ul{
-  margin: 0 0 0 5px;
   padding: 0;
   overflow: hidden;
+  margin-bottom: 0;
 }
 #focus ul li{
-  padding:3px;
+  padding: 0 0 20px 2px;
   list-style: none;
   float: left;
-  /*width: 50%;*/
 }
-
+#focus ul li:last-child{
+  padding-bottom: 0;
+}
 #focus ul li input {
- margin:0px 3px 0px 0px;
+ margin: 0px 5px 0px 0px;
 }
-#focus ul li div.explain{
-  font-size:12px; color:#666; padding:7px 5px 5px 20px;
+#focus ul li p.explain{
+  font-size: 12px;
+  color:#999; 
+  padding: 5px 10px 0 20px;
+  margin: 0;
 }
 #focus ul li#animation_toggle{
   width: 100%;
