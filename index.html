@@ -77,24 +77,34 @@
          
                 <ul>
                   <li>
-                    <input type="radio" name="mapType" id="mapTypeOSM" value="osm" checked="checked" />
-                    <label for="mapTypeOSM">Street map</label>
+                    <input type="checkbox" name="mapType" id="showCitiesChk" value="osm"  />
+                    <label for="showCitiesChk">Show cities</label>
                   </li>
+                  <!--
+                  <li>
+                    <input type="radio" name="mapType" id="mapTypeOSM" value="osm" checked="checked" />
+                    <label for="mapTypeOSM">No labels</label>
+                  </li>
+                  <li>
+                    <input type="radio" name="mapType" id="mapTypeOSMLabels" value="osmlabels"  />
+                    <label for="mapTypeOSMLabels">Labels</label>
+                  </li>
+                  -->
                   <!--
                   <li>
                     <input type="radio" name="mapType" id="mapTypeBM" value="bluemarble" />
                     <label for="mapTypeBM">Satellite</label>
                   </li>
-                  -->
                   <li>
                     <input type="radio" name="mapType" id="mapTypeNone" value="none" />
-                    <label for="mapTypeNone">None</label>
+                    <label for="mapTypeNone">Hide</label>
                   </li>
+                  -->
                 </ul>
       </div>
 
       <div class="section last" id="credits">
-        <p>Map tiles &copy; <a href="http://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a></p>
+        <p>Map data &copy; <a href="http://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a></p>
       </div>
 
 
@@ -112,6 +122,20 @@
     <script type="text/javascript" src="assets/js/load-data.js"></script>
     <script type="text/javascript" src="assets/js/railways.js"></script>
     <script type="text/javascript" src="assets/js/ui.js"></script>
+
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-31432074-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
 
   </body>
 </html>
