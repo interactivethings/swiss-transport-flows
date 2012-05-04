@@ -61,13 +61,14 @@ d3.loadData()
     max: 23,
     value: 9,
     step: 1,
-    change: function(e, ui) {
-      updateHour();
-    }
+    //slide: updateHour,
+    //change: updateHour,
+    slide: function(e, ui) { updateHour(false, true); },
+    change: function(e, ui) { updateHour(false, false); }
   });
 
   $("#time_slider").slider.prototype.nextStep = function() {
-    console.log("called next step");
+    //console.log("called next step");
     if(value < max){
       this.slider( "option" , "value", value + step);
     }else{
@@ -83,7 +84,7 @@ d3.loadData()
 
 
     function toggle() {
-      console.log("toggleling" + running);
+      //console.log("toggleling" + running);
       if(running){
         stop();
         p.removeClass("running");
@@ -111,7 +112,7 @@ d3.loadData()
     };
 
     function run() {
-      console.log("called running");
+      //console.log("called running");
       if (!running)
       return;
 
@@ -225,7 +226,11 @@ d3.loadData()
     .attr("d", mapProjPath);
   }
 
-  function updateHour(force) {
+  function updateHour(force, noAnim) {
+    
+    if (force) noAnim = true;
+    var animDuration = 1000;
+
     var hour = getSelectedHour();
     $('#hourLabel').html(getSelectedHourText());
 
@@ -237,7 +242,7 @@ d3.loadData()
 
       outerg.selectAll('path.segments')
       .transition()
-      .duration(force ? 0 : 500)
+      .duration(noAnim ? 0 : animDuration)
       .attr('stroke-width', function(d, i) {
         if (showRailways) {
           var edgeid = +d.properties.edge_id;
@@ -250,9 +255,10 @@ d3.loadData()
       .attr('stroke', function(d, i) {
         if (showRailways) {
           var edgeid = +d.properties.edge_id;
-          return speedColorScale(data.speeds[edgeid]);
+          var speed = data.speeds[edgeid];
+          return speedColorScale(speed > 0 ? speed : 0);
         } else {
-          return "#666";
+          return "#999";
         }
       });
     }
@@ -260,17 +266,23 @@ d3.loadData()
     var stationsGroup = outerg.selectAll('g.stations');
     if (!showStations) {
       outerg.selectAll('circle.stations')
+      .attr('visibility','hidden')
+      /*
       .attr('fill','white')
       .attr('stroke','black')
-      .attr('r', 2);
+      .attr('r', 2)
+      */
+      ;
     }
 
     if (force || showStations) {
       if (!showRailways) {
         outerg.selectAll('circle.stations')
+        .attr('visibility','visible')
+        .attr('stroke','#ccc')
         .attr('fill',red)
         .transition()
-        .duration(force ? 0 : 500)
+        .duration(noAnim ? 0 : animDuration)
         .attr('r', function(d, i) {
           var station_id = +d.properties.station_id;
           return 0.1 + Math.sqrt(getStationTrainCount(station_id, getSelectedHour()));

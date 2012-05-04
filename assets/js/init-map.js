@@ -2,7 +2,7 @@ var width = window.innerWidth, height = window.innerHeight;
 var vis = d3.select("#map").append("svg:svg").attr('width', width).attr('height', height);
 
 var po = org.polymaps;
-var poMapType;
+//var poMapType;
 
 $(document).bind('stf-ready', function(){
     var curZoomLevel;
@@ -38,15 +38,29 @@ $(document).bind('stf-ready', function(){
 	//console.log(bounds);
 	
 	$('input[name="mapType"]').change(function() {
-		var newMapTiles, val = $('input[name="mapType"]:checked').val();
-		if(val == 'osm') {
+		var newMapTiles;
+    //var val = $('input[name="mapType"]:checked').val();
+    var showCities = $('#showCitiesChk:checked').val();
+		//if (val == 'osm'  ||  val == 'osmlabels') {
+      var style;
+      if (showCities)
+        style = 61319;
+      else
+        style = 61326;
+
 			newMapTiles = po.image()    
 			.url(po.url("http://{S}tile.cloudmade.com"
 		     + "/1a1b06b230af4efdbb989ea99e9841af" // http://cloudmade.com/register
-		     + "/58465/256/{Z}/{X}/{Y}.png")
+         + "/"+style+"/256/{Z}/{X}/{Y}.png"   
+
+           // alternative styles: 26171, 44094, 58465 (no labels), 19321 (greens and lakes), 
+           //   61316 (white, water, no roads)   http://maps.cloudmade.com/editor/style/61326
+           // + "/8ee2a50541944fb9bcedded5165f09d9"     // registered by Ilya 
+         )
 		     .hosts(["a.", "b.", "c.", ""]));
 			 map.zoomRange([1, 18]);
-		}
+    /*
+    }
 		else if(val == 'bluemarble') {
 			newMapTiles = po.image()    
 			.url("http://s3.amazonaws.com/com.modestmaps.bluemarble/{Z}-r{Y}-c{X}.jpg");
@@ -55,6 +69,7 @@ $(document).bind('stf-ready', function(){
 		else {
 			 map.zoomRange([1, 18]);
 		}
+    */
 		if (newMapTiles) {
 			map.add(newMapTiles);
 		}
@@ -65,7 +80,7 @@ $(document).bind('stf-ready', function(){
         bboxg.parentNode.appendChild(bboxg);
 		compass.parentNode.appendChild(compass);
 		
-		poMapType = val;
+		//poMapType = val;
 		mapTiles = newMapTiles;
 	}).change();
 	
