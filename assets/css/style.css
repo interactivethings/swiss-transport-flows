@@ -31,6 +31,11 @@ div#map {
   width: 100%;
 }
 
+svg.map {
+  width: auto !important;
+  height: auto !important;
+}
+
 #map circle {
   stroke-width:0.5;
   cursor:default;
@@ -211,7 +216,8 @@ div#map {
   background: url(../img/icon_sprite.png) 0 0 no-repeat;
   width: 18px;
   height: 18px;
-  margin: 17px 0 0 7px;
+  top: 49px;
+  left: 17px;
   text-indent: -9999px;
 }
 #location #location_btn:hover{

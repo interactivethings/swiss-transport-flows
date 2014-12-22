@@ -18,7 +18,7 @@ $(document).bind('stf-ready', function(){
     // Add the CloudMade image tiles as a base layer…
 	var mapTiles;
 	
-    /*map.add(mapTiles /*po.image()    
+    /*map.add(mapTiles /*po.image()
 	.url(po.url("http://{S}tile.cloudmade.com"
      + "/1a1b06b230af4efdbb989ea99e9841af" // http://cloudmade.com/register
      + "/45763/256/{Z}/{X}/{Y}.png")
